@@ -31,3 +31,6 @@ when instructed to in the assignment!)
 We're producing a simple map to help people find health centers in the
 Philadelphia area. Our application has a few goals. (Full instructions in
 the assignment's [index.html](assignment/index.html))
+
+
+a bit of vandalism
