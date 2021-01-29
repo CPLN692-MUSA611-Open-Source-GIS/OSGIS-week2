@@ -68,7 +68,7 @@
     ===================== */
 
     var map = L.map('map', {
-      center: [39.9522, -75.1639],
+      center: [39.9522, -75.1839],
       zoom: 14
     });
 
@@ -86,9 +86,20 @@
 
     ===================== */
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    // Create an array (of arrays) to store the following info. of restaurants: 
+    // [1.lat, 2.lng, 3.label]
+    let restaurantData = [
+      [39.954523224236226, -75.17594735581235, "Trader Joe\'s (Market St.)"],
+      [39.95918744736335, -75.19456245768572, "Chengdu Famous Food"],
+      [39.95527702824458, -75.21213631263976, "Lulu Café"],
+      [39.9516057,-75.1961374, "Zesto Pizza & Grill"],
+      [39.95363,-75.155733, "Paris Baguette"]
+    ];
+
+    for (var i = 0; i < restaurantData.length; i++){
+        loc = restaurantData[i];
+        L.marker([loc[0],loc[1]]).addTo(map).bindPopup(loc[2]);
+    }
 
     /* =====================
 

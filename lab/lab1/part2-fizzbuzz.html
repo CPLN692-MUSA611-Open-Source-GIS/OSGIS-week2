@@ -33,7 +33,38 @@
 
     ===================== */
 
+    // Function to check if the number is a multiple of three
+    let isMultipleOfThree = (inputNumber) => {
+      return inputNumber % 3 == 0;
+    };
 
+
+    // Function to check if the number is a multiple of five
+    let isMultipleOfFive = (inputNumber) => {
+      return inputNumber % 5 == 0;
+    };
+
+
+    // Function to check if the number is a multiple of both three five
+    let isMultipleOfBothThreeAndFive = (inputNumber) => {
+      return inputNumber % 3 == 0 && inputNumber % 5 == 0;
+    };
+
+    // For loop to iterate through each of the numbers from 1 to 100
+    for (var i = 1; i < 101; i = i + 1) {
+      if (isMultipleOfBothThreeAndFive(i)){
+        console.log('FizzBuzz');
+      }
+      else if (isMultipleOfThree(i)){
+        console.log('Fizz');
+      } 
+      else if (isMultipleOfFive(i)){
+        console.log('Buzz');
+      }
+      else{
+        console.log(i);
+      }
+    }
 
     /* =====================
 
