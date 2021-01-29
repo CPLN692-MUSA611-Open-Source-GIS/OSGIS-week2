@@ -32,7 +32,21 @@
     Start code
 
     ===================== */
+    multipleOfThree = (num) => {return num % 3 == 0};
 
+    multipleOfFive = (num) => {return num % 5 == 0};
+
+    for( let i = 1; i <= 100; i++) {
+      if (multipleOfThree(i) && multipleOfFive(i)){
+        console.log('FizzBuzz');        
+      } else if (multipleOfThree(i)) {
+        console.log('Fizz');
+      } else if (multipleOfFive(i)){
+        console.log('buzz');
+      } else {
+        console.log(i);
+      }    
+    }
 
 
     /* =====================
