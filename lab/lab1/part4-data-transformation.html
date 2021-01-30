@@ -64,19 +64,38 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    var data = bikeArrayDirty;
 
     /* =====================
 
     Start code to filter data
 
     ===================== */
-    let dataFiltered = []
-    for(var i = 0; i<bikeArrayClean.length; i = i+1){
-      if(bikeArrayClean[i][3] > 20){
-        dataFiltered.push(bikeArrayClean[i])
+    for(var i = 0; i < data.length; i = i+1){
+      for(var j = 0; j < data[i].length ; j = j+1){
+        if(j < 2 && isNaN(Number(data[i][j]))){
+          data[i].shift()
+        }
+        if(!isNaN(Number(data[i][j]))){
+          data[i][j] = Number(data[i][j])
+        }
+        else if(typeof(data[i][j]) == "string" && data[i][j].search("stations") != -1){
+          data[i][j] = Number(data[i][j].replace(" stations",""))
+        }
       }
     }
+
+    let dataFiltered = []
+    for(var i = 0; i<data.length; i = i+1){
+      if(data[i][data[i].length-1] > 20 && data[i].length > 2){
+        dataFiltered.push(data[i])
+      }
+    }
+
+    
+
+    
+
     /* =====================
 
     End code to filter data
