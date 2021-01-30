@@ -80,13 +80,14 @@
       ext: 'png'
     }).addTo(map);
 
-    let restaurantData = [[39.95170, -75.15963,'Iron Hill Brewery & Restaurant'],
-        [39.94955, -75.16865,'Pizzeria Vetri'], [39.95037, -75.16654,'Oyster House'],
-        [39.94246045478315, -75.1545760953931,'Brauhaus Schmitz'], [39.95036962516333, -75.16517191469158,'Chris Jazz Cafe']]
+    let restaurantData = [{lat:39.95170, long:-75.15963, name:'Iron Hill Brewery & Restaurant'},
+        {lat:39.94955, long:-75.16865, name:'Pizzeria Vetri'}, {lat:39.95037, long:-75.16654,name:'Oyster House'},
+        {lat:39.94246045478315, long:-75.1545760953931, name:'Brauhaus Schmitz'}, 
+        {lat:39.95036962516333, long:-75.16517191469158, name:'Chris Jazz Cafe'}]
 
     function create_marker (res_data) {
       for (i = 0; i < res_data.length; i = i + 1) {
-        L.marker([res_data[i][0], res_data[i][1]]).addTo(map).bindPopup(res_data[i][2]).openPopup()
+        L.marker([res_data[i].lat, res_data[i].long]).addTo(map).bindPopup(res_data[i].name).openPopup()
       }
     }
 

@@ -64,20 +64,23 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    var data = bikeArrayDirty;
+    var dataCleaned = []
+    var dataFiltered = []
+   
+    for (i = 0; i < data.length; i = i +1) {
+      if (data[i].length == 4) {
+        dataCleaned.push([parseFloat(data[i][1]),parseFloat(data[i][0]),data[i][2],parseFloat(data[i][3].split(' ')[0])])
+        for (m = 0; m < dataCleaned.length; m = m +1) {
+          if (dataCleaned[m][3] > 20) {
+            dataFiltered.push([dataCleaned[m][0],dataCleaned[m][1],dataCleaned[m][2],dataCleaned[m][3]])
+          }
+        }
+      }
+    }
 
     /* =====================
-
-    Start code to filter data
-
-    ===================== */
-
-
-
-    /* =====================
-
-    End code to filter data
-
+    note how lat and long are reversed in the original dataset - KY
     ===================== */
 
     var map = L.map('map', {
@@ -93,19 +96,13 @@
       ext: 'png'
     }).addTo(map);
 
-    /* =====================
+    function add_marker (bike_data) {
+      for (k = 0; k < bike_data.length; k = k + 1) {
+        L.marker([bike_data[k][0], bike_data[k][1]]).addTo(map)
+      }
+    }
 
-    Start code to add markers to map
-
-    ===================== */
-
-
-
-    /* =====================
-
-    End code to add markers to map
-
-    ===================== */
+    add_marker(dataFiltered)
 
     </script>
   </body>
