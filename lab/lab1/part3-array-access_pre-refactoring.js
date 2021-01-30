@@ -82,7 +82,7 @@
 
     let restaurantData = [[39.95170, -75.15963,'Iron Hill Brewery & Restaurant'],
         [39.94955, -75.16865,'Pizzeria Vetri'], [39.95037, -75.16654,'Oyster House'],
-        [39.94246045478315, -75.1545760953931,'Brauhaus Schmitz'], [39.95036962516333, -75.16517191469158,'Chris Jazz Cafe']]
+      [39.94246045478315, -75.1545760953931,'Brauhaus Schmitz'], [39.95036962516333, -75.16517191469158,'Chris Jazz Cafe']]
 
     function create_marker (res_data) {
       for (i = 0; i < res_data.length; i = i + 1) {
