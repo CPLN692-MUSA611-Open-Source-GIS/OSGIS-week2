@@ -71,9 +71,12 @@
     Start code to filter data
 
     ===================== */
-
-
-
+    let dataFiltered = []
+    for(var i = 0; i<bikeArrayClean.length; i = i+1){
+      if(bikeArrayClean[i][3] > 20){
+        dataFiltered.push(bikeArrayClean[i])
+      }
+    }
     /* =====================
 
     End code to filter data
@@ -98,9 +101,9 @@
     Start code to add markers to map
 
     ===================== */
-
-
-
+    for(var i = 0; i <dataFiltered.length;i = i+1){
+      L.marker([dataFiltered[i][1],dataFiltered[i][0]]).addTo(map).bindPopup(dataFiltered[i][2]);
+    }
     /* =====================
 
     End code to add markers to map
