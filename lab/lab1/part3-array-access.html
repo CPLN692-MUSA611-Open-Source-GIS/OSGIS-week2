@@ -85,6 +85,17 @@
     Start code
 
     ===================== */
+    var restaurantData = [
+      {lat:39.95358778582994, lng:-75.1883762874929, label:"Shake Shack"}, 
+      {lat:39.957342975964686, lng:-75.19137153825048, label:"Chipotle"},
+      {lat:39.957661085749784, lng:-75.19113697043326, label:"Seven Eleven"}, 
+      {lat:39.955850194334296, lng:-75.20050679756785, label:"Boston Market"},
+      {lat:39.956915952641744, lng:-75.19699311280505, label:"Han Dynasty"}];
+    
+    for (var i = 0; i < restaurantData.length; i = i + 1 ) {
+      L.marker([restaurantData[i]["lat"], restaurantData[i]["lng"]]).bindPopup(restaurantData[i]["label"]).openPopup().addTo(map)
+      
+    }
 
     L.marker([0, 0]).addTo(map);
     L.marker([0, 0]).addTo(map);

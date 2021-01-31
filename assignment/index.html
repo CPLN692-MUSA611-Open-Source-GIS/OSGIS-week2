@@ -70,10 +70,32 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      var jsonToCsv = function(json) {
+        a = Object.keys(json[0]);
+        newArray = [a]
+        for (var i = 0; i < json.length; i = i + 1 ) {
+          b = Object.values(json[i]);
+          newArray.push(b)
+        };
+        console.log(newArray)
+      };
 
+      var dentalIcon = L.icon({
+        iconUrl: 'images/teechIcon.png',
+        iconSize: [25, 25]
+      });
 
-      var addMarkers = function(map) {};
+      var addMarkers = function(map) {
+        for (var i = 1; i < newArray.length; i = i + 1 ) {
+          if (newArray[i][5] >= 19104 && newArray[i][5] <= 19149) {
+            if (newArray[i][8] != "N/A") {
+              L.marker([newArray[i][1], newArray[i][0]], {icon: dentalIcon}).bindPopup(newArray[i][3]).openPopup().addTo(map)
+            } else {
+              L.marker([newArray[i][1], newArray[i][0]]).bindPopup(newArray[i][3]).openPopup().addTo(map)
+            }
+          };
+        }
+      };
 
       /* =====================
 

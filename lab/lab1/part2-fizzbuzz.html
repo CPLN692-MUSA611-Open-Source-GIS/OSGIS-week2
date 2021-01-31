@@ -26,10 +26,25 @@
     Believe it or not, this is a common programming challenge in job interviews!
 
     ===================== */
+    
+    for (var i = 0; i < 100; i = i +1) {
+      a = i+1;
+      b = 0;
+      if (a%3 == 0 && a%15 != 0) {
+        b = "Fizz"
+      } else if (a%5 == 0 && a%15 != 0) {
+        b = "Buzz"
+      } else if (a%15 == 0) {
+        b = "FizzBuzz"
+      } else {
+        b = a
+      }
+      console.log(b)
+    }
 
     /* =====================
 
-    Start code
+    
 
     ===================== */
 
