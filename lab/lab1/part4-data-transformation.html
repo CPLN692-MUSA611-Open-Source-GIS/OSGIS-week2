@@ -64,14 +64,17 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    var data = bikeArrayDirty;
 
     /* =====================
 
     Start code to filter data
 
     ===================== */
-    let dataFiltered = data.filter(dock => dock[3] > 20);
+    let dataFiltered = data.filter(dock => {
+        return dock.length >= 4 && parseInt(dock[3].split(' ')) > 20;
+      }
+    );
 
 
     /* =====================
@@ -98,8 +101,8 @@
     Start code to add markers to map
 
     ===================== */
-    dataFiltered.forEach(item => {
-      L.marker([item[0], item[1]]).addTo(map);
+    dataFiltered.forEach(function(item) {
+      L.marker([parseFloat(item[1]), parseFloat(item[0])]).addTo(map);
     });
 
 
