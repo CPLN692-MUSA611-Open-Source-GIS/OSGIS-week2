@@ -63,24 +63,31 @@
        use them to organize your code. It *will* save you hours of work if you can get in the habit.
       ===================== */
 
+      var jsonToCsv = function(json) { 
+        let csv = []
+        csv[0] = Object.keys(json[0])    // start with the column name - KY
+        for (i = 0; i < json.length; i = i +1) {
+          row = Object.values(json[i])   // get the values in one array - KY
+          csv[i+1] = row     // attach the array of values to the final dataset - KY
+          }
+        return csv;
+      };
 
-      /* =====================
-
-      Start code
-
-      ===================== */
-
-      var jsonToCsv = function(json) { console.log(json); };
-
-
-      var addMarkers = function(map) {};
-
-      /* =====================
-
-      End code
-
-      ===================== */
-
+      var addMarkers = function(map) {
+        csv = jsonToCsv(healthCenters)
+        for (k = 1; k < csv.length; k = k + 1) {
+          if (csv[k][5] > 19140 & csv[k][5] < 19149) {
+          L.marker([csv[k][1], csv[k][0]]).addTo(map).bindPopup(csv[k][3]).openPopup()
+            if (csv[k][8] != "N/A") {
+              myIcon = L.icon ({
+                iconUrl: 'dental_icon.png',
+                iconSize: [35, 35]
+              })
+              L.marker([csv[k][1], csv[k][0]],{icon:myIcon}).addTo(map)
+            }
+          }
+        }
+      };
 
       // `healthCenters` is defined in health_centers.js
       jsonToCsv(healthCenters);
