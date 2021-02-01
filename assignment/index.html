@@ -70,10 +70,28 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      var jsonToCsv = function(data) {
+        var csv = [];
+        csv[0] = Object.keys(data[0])
+        for(var i = 1; i < data.length; i = i+1){
+          csv[i] = Object.values(data[i-1])
+        } 
+        console.log(csv);
+       };
 
 
-      var addMarkers = function(map) {};
+      var addMarkers = function(data) {
+        for(var i = 0; i <data.length;i = i+1){
+          L.marker([data[i]["LAT"],data[i]["LNG"]]).addTo(map).bindPopup(data[i]["NAME"]);
+        }
+      };
+
+      var healthCentersZip = []
+      for(var i = 0; i < healthCenters.length; i = i+1){
+        if(healthCenters[i]["ZIP"] >= 19140 && healthCenters[i]["ZIP"] <= 19149){
+          healthCentersZip.push(healthCenters[i]);
+        }
+      }
 
       /* =====================
 
@@ -84,7 +102,7 @@
 
       // `healthCenters` is defined in health_centers.js
       jsonToCsv(healthCenters);
-      addMarkers(map);
+      addMarkers(healthCentersZip);
     </script>
     <!--Your code ends here-->
   </body>
