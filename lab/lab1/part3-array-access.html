@@ -86,9 +86,29 @@
 
     ===================== */
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    // restaurantData array
+    restaurantData = [[39.95381688766, -75.15537298663061,"EMei Restaurant, Philly"],
+                      [4.615298929961124, -74.08455476895196, "Plaza de Mercado Paloquemao,  Bogotá, Colombia"],
+                      [30.505977129168854, 117.04043620521084, "Dananmen Mosque Beef Shop, Anqing, China"]]
+    // Add markers
+    restaurantData.forEach(function (item) {
+      L.marker([item[0], item[1]]).addTo(map);
+    });
+
+    // Add two more restaurants
+    restaurantData.push([40.74641214974041, -73.98479417605358, "Her Name is Han, NYC"],
+                          [40.06326213825046, -75.13769842235847, "Dubu, Philly"])
+    // Add markers with popup
+    restaurantData.forEach(function (item) {
+      L.marker([item[0], item[1]]).bindPopup(item[2]).openPopup().addTo(map);
+    });
+
+    // Use objects
+    newRestrData = [];
+    restaurantData.forEach(function (item) {
+      newRestrData.push({"lat" : item[0], "lng" : item[1], "label":item[2]})
+    });
+    console.log(newRestrData);
 
     /* =====================
 
