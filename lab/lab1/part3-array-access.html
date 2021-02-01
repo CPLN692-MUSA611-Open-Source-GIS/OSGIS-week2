@@ -85,11 +85,30 @@
     Start code
 
     ===================== */
+    let restaurantData = [[39.9558508645567, -75.21175063283816, 'Hadramout Restaurant'], [39.95222706740459, -75.17278455039641, 'Stock Rittenhouse'], [39.94922463366536, -75.1594028720396, 'Xiandu Thai Fusion Cuisine']]
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    restaurantData.push([39.952584453034135, -75.16988394049221, 'Harper\'s Garden'])
+    restaurantData.push([39.94537346985201, -75.16273933050554, 'Sumo Sushi'])
 
+    //restaurantData.forEach(function(item, index, array) {
+    //  L.marker([item[0], item[1]]).addTo(map)
+    //})
+
+    //L.marker([39.9558508645567, -75.21175063283816]).addTo(map);
+    //L.marker([39.95222706740459, -75.17278455039641]).addTo(map);
+    //L.marker([39.94922463366536, -75.1594028720396]).addTo(map);
+
+
+    //marker.bindPopup(item[2]).openPopup()
+
+    for (i = 0; i < restaurantData.length; i++){
+      var markerLocation = new L.LatLng(restaurantData[i][0], restaurantData[i][1]);
+      var marker = new L.Marker(markerLocation);
+      map.addLayer(marker);
+      marker.bindPopup(restaurantData[i][2]);
+      //L.addLayer(marker);
+    };
+    //referring to https://harrywood.co.uk/maps/examples/leaflet/marker-array.view.html
     /* =====================
 
     End code
