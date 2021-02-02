@@ -79,12 +79,25 @@
         console.log(csv);
        };
 
+       var dentalIcon = L.icon({
+         iconUrl:'images/dental.png',
+         iconSize: [20,20]
+       })
+
 
       var addMarkers = function(data) {
         for(var i = 0; i <data.length;i = i+1){
-          L.marker([data[i]["LAT"],data[i]["LNG"]]).addTo(map).bindPopup(data[i]["NAME"]);
+          if(data[i]["DENTAL_PHONE"] != "N/A"){
+            L.marker([data[i]["LAT"],data[i]["LNG"]], {icon:dentalIcon}).addTo(map).bindPopup(data[i]["NAME"]);
+          }
+          else{
+            L.marker([data[i]["LAT"],data[i]["LNG"]]).addTo(map).bindPopup(data[i]["NAME"]);
+          }
         }
       };
+
+      healthCenters[0]["DENTAL_PHONE"]
+
 
       var healthCentersZip = []
       for(var i = 0; i < healthCenters.length; i = i+1){
