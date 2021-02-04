@@ -102,6 +102,13 @@
       L.marker([restaurantData[i][0], restaurantData[i][1]]).addTo(map).bindPopup(restaurantData[i][2]).openPopup();
     }
 
+    // Refactored code using objects
+
+    let restaurantObjectArray = [{lat:39.944455413154614, long:-75.1727846548593, name:'Bistro Southeast'}, {lat:39.93865051311179, long:-75.15624626464067, name:'Tres Jalapenos'}, {lat:39.937469747190036, long:-75.1769253898392, name:'On Point'}, {lat:39.938216063233085, long:-75.16319586991072, name:'Pho 75'}, {lat:39.950892453345645, long:-75.17037613807442, name:'Hip City Veg'}]
+
+    for (var i = 0; i < restaurantObjectArray.length; i = i+1) {
+      L.marker([restaurantObjectArray[i]['lat'], restaurantObjectArray[i]['long']]).addTo(map).bindPopup(restaurantObjectArray[i]['name']).openPopup();
+    }
     /* =====================
 
     End code
