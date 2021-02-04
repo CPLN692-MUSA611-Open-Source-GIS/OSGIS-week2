@@ -110,7 +110,7 @@
 
     ===================== */
     for (var i=0; i<dataFiltered.length; i=i+1) {
-      marker = L.marker([dataFiltered[i][1], dataFiltered[i][0]]).addTo(map)
+      marker = L.marker([dataFiltered[i][1], dataFiltered[i][0]]).bindPopup('avaiable bikes: ' + dataFiltered[i][3]).openPopup().addTo(map)
     }
 
 
