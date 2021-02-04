@@ -121,6 +121,16 @@
     }
 
 
+//Task 5
+var object = restaurantData.map(function(x) {
+  return { 
+lat: x[0], 
+lng: x[1],
+name:x[2], 
+}; 
+});
+console.log('restaurantdataObject', object);
+
     /* =====================
 
     End code

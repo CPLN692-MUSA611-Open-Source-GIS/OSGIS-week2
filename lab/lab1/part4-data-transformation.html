@@ -63,8 +63,13 @@
     and in tackling real programming challenges)
 
     ===================== */
+    //Clean Data
+var data = bikeArrayClean;
+    console.log(data)
 
-    var data = bikeArrayClean;
+//Dirty Data
+    var dirtydata = bikeArrayDirty
+    console.log(dirtydata)
 
     /* =====================
 
@@ -72,11 +77,53 @@
 
     ===================== */
 
+//Clean Data
+var data = bikeArrayClean;
+    console.log(data)
+
+//Filtering the clean data for stations that have over 20 bikes docked there
+var datafiltered = data.filter(function(a){
+    return a[3] > 20;
+});
+// or, more terse:
+//var dataFilteredAlt = data.filter((a) => { return a[3] > 20; });
+
+console.log('datafiltered', datafiltered)
+
+var dirtydata = bikeArrayDirty
+    console.log(dirtydata)
+//Filtering the data in three steps
+
+//Step 1: Only stations that have a fourth index feature
+    var dirtydatalength = dirtydata.filter(function(b){
+      
+      return b.length==4 
+    })
+//Step 2: Now filter out the word 'stations' using .replace and make the whole thing into a number
+    var dirtydatastations = dirtydatalength.map(function(b){ //b is the subarray
+      stationcount=Number(b[3].replace(" stations", ""))
+      b[3]=stationcount
+      return b
+    })
+console.log('dirtydatastations', dirtydatastations) //checking to see if it worked
+
+//Step 3: Now filter to just the stations that have over 20 bikes docked there
+var dirtydatatwenty = dirtydatastations.filter(function(a){
+    return a[3] > 20;
+});
+
 
 
     /* =====================
 
     End code to filter data
+
+    ===================== */
+
+
+    /* =====================
+
+    Start code to add markers to map
 
     ===================== */
 
@@ -92,14 +139,13 @@
       maxZoom: 20,
       ext: 'png'
     }).addTo(map);
+    
+   //if you want to see with the dirty data filtered instead of clean data, sub out datafiltered for dirtydatatwenty
 
-    /* =====================
-
-    Start code to add markers to map
-
-    ===================== */
-
-
+     for (var i=0; i < datafiltered.length; i++) 
+    {
+      L.marker([datafiltered[i][1],datafiltered[i][0]]).addTo(map).bindPopup(datafiltered[i][2]).openPopup();
+    }
 
     /* =====================
 
