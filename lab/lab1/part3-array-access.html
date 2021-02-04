@@ -91,14 +91,14 @@
     restaurantData = [res1,res2,res3]
 
     AddMarker=(Res)=>{
-      for (var i=0;)
+      for (var i=0;i<length(restaurantData)+1;i=i+1){
+        L.marker([Res[i][0,1]]).addTo(map)
+      }
     }
 
 
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+
 
     /* =====================
 
