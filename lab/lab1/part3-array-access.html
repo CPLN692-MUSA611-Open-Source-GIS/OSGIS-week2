@@ -92,7 +92,7 @@
 
    function AddMarker(Res){
       for (var i=0;i<Res.length;i=i+1){
-        L.marker([Res[i][0],Res[i][1]]).addTo(map)
+        L.marker([Res[i][0],Res[i][1]]).bindPopup(Res[i][2]).openPopup().addTo(map)
       }
     }
 
