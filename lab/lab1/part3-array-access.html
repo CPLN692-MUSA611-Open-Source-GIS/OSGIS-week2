@@ -51,7 +51,8 @@
     ## Task 4: Add Popups to Markers
 
     Add popups to your markers. The popup should contain the label for your restaurant. Refer
-    to the Leaflet documentation for instructions on adding a popup: http://leafletjs.com/reference.html#popup
+    to the Leaflet documentation for instructions on adding a popup: http:/
+    /leafletjs.com/reference.html#popup
 
     ## Task 5: Convert to JS Objects
 
@@ -86,15 +87,37 @@
 
     ===================== */
 
+//creating array of array
+    var restaurantData = new Array ( );
+restaurantData[0] = new Array ( 39.949808, -75.209246, "Green Line Cafe" );
+restaurantData[1] = new Array ( 39.952241, -75.174846, "JJ Thai" );
+restaurantData[2] = new Array ( 39.949231, -75.170823, "Parc" );
+
+
     L.marker([0, 0]).addTo(map);
     L.marker([0, 0]).addTo(map);
     L.marker([0, 0]).addTo(map);
 
+
+//creating markers
+    let create_marker = (restaurantData) => {
+      for (i = 0; i < restaurantData.length; i = i + 1) {
+        L.marker([restaurantData[i][0], restaurantData[i][1]]).addTo(map).bindPopup(restaurantData[i][2]).openPopup()
+      }
+    }
+    
+//adding two new stops
+restaurantData[3] = new Array ( 39.949864, -75.175968, "Four Seasons Food Market" );
+restaurantData[4] = new Array ( 39.950939, -75.178540, "Lost Bread" );  
+
+    create_marker (restaurantData)
     /* =====================
 
     End code
 
     ===================== */
+    
+  
 
     </script>
   </body>
