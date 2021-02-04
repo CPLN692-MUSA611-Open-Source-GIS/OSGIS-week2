@@ -88,15 +88,15 @@
     var res1= [39.95519, -75.15594,'Xunyu']
     var res2= [39.95228, -75.16946,'Paris Bagel']
     var res3= [39.95360, -75.18833, 'Cafe']
-    restaurantData = [res1,res2,res3]
+    var restaurantData = [res1,res2,res3]
 
-    AddMarker=(Res)=>{
-      for (var i=0;i<length(restaurantData)+1;i=i+1){
-        L.marker([Res[i][0,1]]).addTo(map)
+   function AddMarker(Res){
+      for (var i=0;i<Res.length;i=i+1){
+        L.marker([Res[i][0],Res[i][1]]).addTo(map)
       }
     }
 
-
+    AddMarker(restaurantData)
 
 
 
