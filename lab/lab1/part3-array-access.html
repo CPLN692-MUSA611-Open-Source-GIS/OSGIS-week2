@@ -94,9 +94,9 @@
   //task 3: add two more restaurants
   restaurantData.push([39.9289439,-75.1997189, 'Bing Bing Dim Sum'], [39.9573357,-75.1880429, 'Su Xing House']);
 
-  //task 2
+  //task 2 and task 4
     for (var i=0; i < restaurantData.length; i=i+1) {
-      marker = new L.marker(restaurantData[i]).addTo(map);
+      marker = new L.marker(restaurantData[i]).bindPopup('Restaurant Name: ' + restaurantData[i][2]).openPopup().addTo(map);
     }
 
 
