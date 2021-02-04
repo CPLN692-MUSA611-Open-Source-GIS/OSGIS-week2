@@ -37,6 +37,16 @@
 
     Here's the simplest array of arrays: [[]]
     Here's an array of arrays with two subarrays: [[], []]
+    
+      L.marker([39.95036332152491, -75.16686185158304]).addTo(map)
+      .bindPopup('Goldies Falafel <br> I love the Mint Chocolate Techina Shakes!')
+    .openPopup();
+      L.marker([39.950749633400534, -75.17031405428726]).addTo(map)
+      .bindPopup('HipCityVeg <br> Get the sweet potato fries!')
+    .openPopup();
+      L.marker([39.961421999066324, -75.14148612943254]).addTo(map)
+      .bindPopup('Blackbird Pizzeria <br> Their vegan cheese is incredible.')
+    .openPopup();
 
     ## Task 2: Process Data
 
@@ -86,9 +96,30 @@
 
     ===================== */
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    // L.marker([0, 0]).addTo(map);
+    // L.marker([0, 0]).addTo(map);
+    // L.marker([0, 0]).addTo(map);
+
+
+    // ArrayList <String> restaurantData = new ArrayList <String>();
+    // restaurantData.add("39.95036332152491, -75.16686185158304");
+    // console.log(restaurantData);
+
+    let restaurantData = [
+      [39.95036332152491, -75.16686185158304,'Goldies'],
+      [39.950749633400534, -75.17031405428726,'HipCityVeg'],
+      [39.961421999066324, -75.14148612943254, 'BlackBird Pizzeria'],
+      [39.944746536845365, -75.16500287152384, 'Tacodelphia'],
+      [39.94687641469158, -75.14453259302594, 'Zahav']
+    ];
+
+    console.log(restaurantData)
+
+    for (var i=0; i < restaurantData.length; i++) 
+    {
+      L.marker([restaurantData[i][0],restaurantData[i][1]]).addTo(map).bindPopup(restaurantData[i][2]).openPopup();
+    }
+
 
     /* =====================
 
