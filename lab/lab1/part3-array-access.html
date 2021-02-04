@@ -88,16 +88,17 @@
     var res1= [39.95519, -75.15594,'Xunyu']
     var res2= [39.95228, -75.16946,'Paris Bagel']
     var res3= [39.95360, -75.18833, 'Cafe']
+  
     var restaurantData = [res1,res2,res3]
-
-   function AddMarker(Res){
+    
+    restaurantData.push([39.955796983581884, -75.20167040221082,'Dim Sum House'],[39.95059537060668, -75.15836925793559,'Taco Bell'])
+    function AddMarker(Res){
       for (var i=0;i<Res.length;i=i+1){
         L.marker([Res[i][0],Res[i][1]]).bindPopup(Res[i][2]).openPopup().addTo(map)
       }
     }
-
+    
     AddMarker(restaurantData)
-
 
 
     /* =====================
