@@ -22,13 +22,25 @@
         center: [39.9522, -75.1639],
         zoom: 14
       });
-      var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
-        attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        subdomains: 'abcd',
-        minZoom: 0,
-        maxZoom: 20,
-        ext: 'png'
+     var Mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoidG92YXBlcmxtYW4iLCJhIjoiY2tnMmI1dHc2MDdqZDJ5cGp0cXB4cGIzdyJ9.99wVATTuLk9wR5Fqglh1oQ'
       }).addTo(map);
+
+      var myIcon = L.icon({
+    iconUrl: 'images/tooth.jpg',
+    iconSize: [38, 95],
+    iconAnchor: [22, 94],
+    popupAnchor: [-3, -76],
+    //shadowUrl: 'my-icon-shadow.png',
+    shadowSize: [68, 95],
+    shadowAnchor: [22, 94]
+});
+
     </script>
     <script>
       /* =====================
@@ -73,7 +85,41 @@
       var jsonToCsv = function(json) { console.log(json); };
 
 
-      var addMarkers = function(map) {};
+      //Creates the function to just extract object values
+      var extracthealthcentervalues = function(x){
+      return Object.values(x)} //Could possibly do this for object.keys but don't need to 
+
+// Then we map using the function on the existing array of arrays and name it a new variable healthCenterszip. Let's check if it worked by printing out to the console!
+//What we should see is that the keys or names are longer there 
+      healthCenterszip = healthCenters.map(extracthealthcentervalues)
+      console.log('healthcenterszip', healthCenterszip)
+
+    
+      
+      //Now we filter out so we only get zip codes between 19140 and 19149
+        var healthCentersfiltered= healthCenterszip.filter(function(a){
+          return a[5] > 19139 && a[5]<19150});
+          console.log('healthCentersfiltered',healthCentersfiltered)
+
+//Now we add the markers to the map. Create a for loop to iterate through our array and create pop up markers
+    var addMarkers = function(map) {
+    for (var i=0; i < healthCentersfiltered.length; i++)
+    {
+    L.marker([healthCentersfiltered[i][1],healthCentersfiltered[i][0]]).addTo(map).bindPopup(healthCentersfiltered[i][3],healthCentersfiltered[i][8]).openPopup();
+    }};
+
+        //Now we filter out so we only get the centers with dental phone numbers
+        var healthCentersDental= healthCenterszip.filter(function(a){
+          return a[8] != "N/A"});
+          console.log('healthCentersDental',healthCentersDental)
+
+//Now we add the dental markers to the map. Create a for loop to iterate through our array and create pop up markers
+    // var addMarkers = function(map) {
+    // for (var i=0; i < healthCentersDental.length; i++)
+    // {
+    // L.marker([healthCentersDental[i][1],healthCentersDental[i][0]], {icon:myIcon}).addTo(map).bindPopup(healthCentersDental[i][3]).openPopup();
+    // }};
+
 
       /* =====================
 
