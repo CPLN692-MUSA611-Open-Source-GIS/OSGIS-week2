@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--stylesheet imports-->
+    <link rel="stylesheet" href="leaflet.css" />
+  </head>
+  <body>
+
+    <!--left panel-->
+    <div style="position: absolute; left: 0px; width: 400px; top: 0; bottom: 0;"></div>
+    <!--map-->
+    <div id="map" style="position: absolute; right: 0; left: 400px; top: 0; bottom: 0;"></div>
+
+    <!--javascript imports-->
+    <!--
+      We'll eventually be writing all javascript in separate files (like
+      those referenced below) to better organize our thoughts
+    -->
+    <script src="leaflet.js"></script>
+    <script src="part4-data-clean.js"></script>
+    <script src="part4-data-dirty.js"></script>
+
+    <script>
+
+    /* =====================
+
+    # Lab 2, Part 2 — Data Transformation
+
+    ## Introduction
+
+    We're going to explore Philadelphia Bike Share locations. We will be using data from
+    OpenDataPhilly (https://www.opendataphilly.org/dataset/bike-share-stations).
+
+    We have converted the data from OpenDataPhilly into an array of arrays
+    (e.g. [[],[]], similar to part3). However, our arrays for bike share data
+    have an extra data point:
+
+    1. lat
+    2. lng
+    3. label
+    4. number of bike share docks at the station
+
+    This information is stored in the variable "data" in the code below. You can view the entire
+    array in the part4-data-clean.js file.
+
+    ## Data Processing
+
+    We are only interested in bike share stations with more than 20 docks. Programmatically create
+    a new array variable "dataFiltered" that only contains locations with more than 20 docks.
+
+    ## Add Markers to the map
+
+    Loop through this filtered array, adding all markers to the map.
+
+    ## Working with Dirty Data
+
+    Often, our data will contain inconsistencies that can cause problems in our code. In the code
+    below, switch out "bikeArrayClean" with "bikeArrayDirty". If you reload your map now, the
+    markers should be gone. You can review the dirty data in part4-data-dirty.js.
+
+    ***Without modifying*** part4-data-dirty.js, change your code to account for the dirty data.
+    Use your best judgment, there's no single correct answer (as is so often the case in real life
+    and in tackling real programming challenges)
+
+    ===================== */
+
+    var data = bikeArrayDirty;
+
+    /* =====================
+
+    Start code to filter data
+
+    ===================== */
+    var dataFiltered = []
+
+    function Filterdata(Bike){
+      for (i=0;i<Bike.length;i=i+1){
+        if (Bike[i].length==4){
+          if (parseInt(Bike[i][3])>20){
+            dataFiltered.push([Bike[i][0],Bike[i][1],Bike[i][2],Bike[i][3]])
+          }
+          else{
+            console.log('Number of bike share docks smaller or equal than 20')
+          }
+        }
+        else{
+          console.log('Wrong')}
+        }
+      
+     }
+  
+
+
+    Filterdata(data)
+    console.log(dataFiltered)
+
+   
+
+
+    /* =====================
+
+    End code to filter data
+
+    ===================== */
+
+    var map = L.map('map', {
+      center: [39.9522, -75.1639],
+      zoom: 14
+    });
+
+    var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      subdomains: 'abcd',
+      minZoom: 0,
+      maxZoom: 20,
+      ext: 'png'
+    }).addTo(map);
+
+    /* =====================
+
+    Start code to add markers to map
+
+    ===================== */
+    function AddMarker(bikedata){
+      for (var i=0;i<bikedata.length;i=i+1){
+        L.marker([bikedata[i][1],bikedata[i][0]]).bindPopup(bikedata[i][2]).addTo(map)
+      }
+    }
+
+    AddMarker(dataFiltered)
+
+
+    /* =====================
+
+    End code to add markers to map
+
+    ===================== */
+
+    </script>
+  </body>
+</html>
