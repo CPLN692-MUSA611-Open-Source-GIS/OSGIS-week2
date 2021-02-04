@@ -24,7 +24,7 @@
 
     /* =====================
 
-    # Lab 2, Part 2 — Data Transformation
+    # Lab 1, Part 2 — Data Transformation
 
     ## Introduction
 
@@ -71,8 +71,19 @@
     Start code to filter data
 
     ===================== */
+    
+    function filter (data) {
+      var arrayLen = data.length;
+      var filtered = [];
+      for (var i=0; i<arrayLen; i=i+1) {
+        if(data[i][3] > 20) {
+          filtered.push(data[i])
+        }
+      }
+      return filtered;
+    }
 
-
+    var dataFiltered = filter(data)
 
     /* =====================
 
@@ -98,7 +109,9 @@
     Start code to add markers to map
 
     ===================== */
-
+    for (var i=0; i<dataFiltered.length; i=i+1) {
+      marker = L.marker([dataFiltered[i][1], dataFiltered[i][0]]).addTo(map)
+    }
 
 
     /* =====================
