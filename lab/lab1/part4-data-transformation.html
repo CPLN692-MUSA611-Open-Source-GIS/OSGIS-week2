@@ -71,7 +71,23 @@
     Start code to filter data
 
     ===================== */
+    var dataFiltered = []
 
+    function Filterdata(Bike){
+      for (i=0;i<Bike.length;i=i+1){
+        if (Bike[i][3]>20){
+          dataFiltered.push([Bike[i][0],Bike[i][1],Bike[i][2],Bike[i][3]])
+        }
+        else{
+          console.log('Number of bike share docks smaller or equal than 20')
+        }
+      }    
+    }
+
+    Filterdata(data)
+    console.log(dataFiltered)
+
+   
 
 
     /* =====================
@@ -98,7 +114,13 @@
     Start code to add markers to map
 
     ===================== */
+    function AddMarker(bikedata){
+      for (var i=0;i<bikedata.length;i=i+1){
+        L.marker([bikedata[i][1],bikedata[i][0]]).bindPopup(bikedata[i][2]).addTo(map)
+      }
+    }
 
+    AddMarker(dataFiltered)
 
 
     /* =====================
