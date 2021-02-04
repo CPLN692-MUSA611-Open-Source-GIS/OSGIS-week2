@@ -69,7 +69,7 @@
 
     var map = L.map('map', {
       center: [39.9522, -75.1639],
-      zoom: 14
+      zoom: 13
     });
 
     var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
@@ -85,6 +85,22 @@
     Start code
 
     ===================== */
+
+  //task 1: restaurant data
+  restaurantData = [[39.945525, -75.1902579, 'EMei Restaurant'], 
+                    [39.954753,-75.1583851, 'Ting Wong'],
+                    [39.9485222,-75.1459218, 'Han Dynasty - Old City']];
+  
+  //task 3: add two more restaurants
+  restaurantData.push([39.9289439,-75.1997189, 'Bing Bing Dim Sum'], [39.9573357,-75.1880429, 'Su Xing House']);
+
+  //task 2
+    for (var i=0; i < restaurantData.length; i=i+1) {
+      marker = new L.marker(restaurantData[i]).addTo(map);
+    }
+
+
+  //39.9485222,-75.1459218, 'Han Dynasty - Old City'
 
     L.marker([0, 0]).addTo(map);
     L.marker([0, 0]).addTo(map);
