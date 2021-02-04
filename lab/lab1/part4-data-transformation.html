@@ -64,7 +64,7 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    var data = bikeArrayDirty;
 
     /* =====================
 
@@ -72,18 +72,58 @@
 
     ===================== */
     
-    function filter (data) {
-      var arrayLen = data.length;
-      var filtered = [];
-      for (var i=0; i<arrayLen; i=i+1) {
-        if(data[i][3] > 20) {
-          filtered.push(data[i])
-        }
-      }
-      return filtered;
-    }
+    //function filter (data) {
+      //var arrayLen = data.length;
+      //var filtered = [];
+      //for (var i=0; i<arrayLen; i=i+1) {
+        //if(data[i][3] > 20) {
+          //filtered.push(data[i])
+        //}
+      //}
+      //return filtered;
+    //}
 
-    var dataFiltered = filter(data)
+    //var dataFiltered = filter(data)
+
+  //dirty data--function to filter out data which loss information
+  function lossinfo (data) {
+    var lossParameter = [];
+    for (var i=0; i<data.length; i++) {
+      if (data[i].length != 4) {
+        lossParameter.push(data[i])
+      }
+    }
+    return lossParameter
+  }
+
+  function fullinfo (data) {
+    var fourParameter = [];
+    for (var i=0; i<data.length; i++) {
+      if (data[i].length == 4) {
+        fourParameter.push(data[i])
+      }
+    }
+    return fourParameter
+  }
+
+  
+  //global variables
+  var fullData = fullinfo(data)
+  var lossData = lossinfo(data)
+  
+
+
+
+  function changeNum (data) {
+    var num = [];
+    for (var i=0; i<data.length; i++) {
+      if (parseInt(data[i]) > 0) { //only take the data which could be transferred to integer
+        num.push(parseInt(data[i]))
+      }
+    }
+    return num
+  }
+
 
     /* =====================
 
@@ -109,8 +149,15 @@
     Start code to add markers to map
 
     ===================== */
-    for (var i=0; i<dataFiltered.length; i=i+1) {
-      marker = L.marker([dataFiltered[i][1], dataFiltered[i][0]]).bindPopup('avaiable bikes: ' + dataFiltered[i][3]).openPopup().addTo(map)
+    //for (var i=0; i<dataFiltered.length; i=i+1) {
+      //marker = L.marker([dataFiltered[i][1], dataFiltered[i][0]]).bindPopup('avaiable bikes: ' + dataFiltered[i][3]).openPopup().addTo(map)
+    //}
+
+
+
+    //map put the data which do not have missing data
+    for (var i=0; i<fullData.length; i++) {
+      marker = L.marker([fullData[i][1], fullData[i][0]]).bindPopup('Address: ' + fullData[i][2] + ' with ' + fullData[i][3] + '.').openPopup().addTo(map)
     }
 
 
