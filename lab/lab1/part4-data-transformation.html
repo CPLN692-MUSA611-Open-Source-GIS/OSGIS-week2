@@ -89,7 +89,7 @@
   function lossinfo (data) {
     var lossParameter = [];
     for (var i=0; i<data.length; i++) {
-      if (data[i].length != 4) {
+      if (data[i].length == 2 | data[i].length == 3 | data[i].length == 1) {
         lossParameter.push(data[i])
       }
     }
@@ -113,18 +113,6 @@
   
 
 
-
-  function changeNum (data) {
-    var num = [];
-    for (var i=0; i<data.length; i++) {
-      if (parseInt(data[i]) > 0) { //only take the data which could be transferred to integer
-        num.push(parseInt(data[i]))
-      }
-    }
-    return num
-  }
-
-
     /* =====================
 
     End code to filter data
@@ -133,7 +121,7 @@
 
     var map = L.map('map', {
       center: [39.9522, -75.1639],
-      zoom: 13
+      zoom: 14
     });
 
     var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
@@ -155,11 +143,27 @@
 
 
 
-    //map put the data which do not have missing data
+    //map out the data which do not have missing data
     for (var i=0; i<fullData.length; i++) {
       marker = L.marker([fullData[i][1], fullData[i][0]]).bindPopup('Address: ' + fullData[i][2] + ' with ' + fullData[i][3] + '.').openPopup().addTo(map)
     }
 
+
+
+    //code referenced from Leaflet
+    var myIcon = L.icon({
+        iconUrl: "https://cdn3.iconfinder.com/data/icons/location-pointer/100/map_pointer_pin_marker_location-02-512.png",
+        iconSize: [55, 55], // size of the icon
+        popupAnchor: [0,-15]
+        });
+ 
+
+    //map out the data which have missing info
+    for (var i=0; i<lossData.length; i++) {
+      marker = L.marker([lossData[i][1], lossData[i][0]], {icon:  myIcon}).
+      bindPopup('Stations where loss related information').openPopup().
+      addTo(map);
+    }
 
     /* =====================
 
