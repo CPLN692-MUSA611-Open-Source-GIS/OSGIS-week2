@@ -87,6 +87,23 @@
     }
     /*Answer : 6857*/
 
+    /*Question 4*/ 
+    loop1:
+    for(var i = 999999; i >99999; i = i-1){
+      var num = String(i);
+      if(num.substring(0,num.length/2) == num.substring(num.length/2,num.length).split("").reverse().join("")){
+        for(var j = 100; j <= Math.sqrt(i); j = j+1){
+          if(i % j == 0 && i / j >= 100 && i / j <= 999){
+            var result = i;
+            break loop1;
+          }
+        }
+      }
+    }
+    console.log(result);
+    /*Answer : 906609
+
+
 
     /* =====================
 
