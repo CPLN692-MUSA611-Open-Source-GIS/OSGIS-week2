@@ -68,7 +68,7 @@
     ===================== */
 
     var map = L.map('map', {
-      center: [39.9522, -75.1639],
+      center: [39.9522, -75.1839],
       zoom: 14
     });
 
@@ -86,9 +86,33 @@
 
     ===================== */
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    // Task 1
+    // Create an array (of arrays) to store the following info. of restaurants: 
+    // [1.lat, 2.lng, 3.label]
+    let restaurantData = [
+      [39.954523224236226, -75.17594735581235, "Trader Joe\'s (Market St.)"],
+      [39.95918744736335, -75.19456245768572, "Chengdu Famous Food"],
+      [39.95527702824458, -75.21213631263976, "Lulu Café"],
+      [39.9516057,-75.1961374, "Zesto Pizza & Grill"],
+      [39.95363,-75.155733, "Paris Baguette"]
+    ];
+
+    // Task 2,3,4
+    // Add markers and pop-ups to map
+    for (var i = 0; i < restaurantData.length; i++){
+        loc = restaurantData[i];
+        L.marker([loc[0],loc[1]]).addTo(map).bindPopup(loc[2]);
+    };
+
+    // Task 5
+    // Create a new array of JS objects for restaurant data
+    var objRestaurantData = [];
+    // Function: Read the elements of the array and convert it to JS object
+    let toJSObject = (input) => {
+      objOutput = {"Name":input[2], "Longitude":input[0], "Latitude":input[1]}
+      objRestaurantData.push(objOutput); // push the JS object to the array of objects
+    };
+    restaurantData.forEach(toJSObject);
 
     /* =====================
 
