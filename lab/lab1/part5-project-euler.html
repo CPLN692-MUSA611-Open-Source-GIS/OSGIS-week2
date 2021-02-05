@@ -30,11 +30,28 @@
 
 
     /* =====================
-
     Start code
 
     ===================== */
 
+    /*Problem1:If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. 
+    The sum of these multiples is 23. Find the sum of all the multiples of 3 or 5 below 1000. */
+
+    //find out the list of all numbers which are multiples of 3 or 5
+    function getNum(num) {
+      var dataList = []
+      for (var i=0; i<num; i++) {
+        if (i % 3 == 0 | i % 5 == 0) {
+          dataList.push(i)
+        }
+      }
+      return dataList
+    }
+
+    var threeAndFive = getNum(10)
+
+    //find out the sum
+    var sum = console.log(threeAndFive.reduce((a, b) => a + b))
 
 
     /* =====================
