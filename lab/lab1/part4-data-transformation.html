@@ -66,12 +66,24 @@
 
     var data = bikeArrayClean;
 
+    var data1 = bikeArrayDirty; 
+
     /* =====================
 
     Start code to filter data
 
     ===================== */
 
+    value = 20
+
+    dataFiltered = data.filter(item => item[3] > value)
+
+    console.log(dataFiltered)
+
+    let dataFilteredDirty = bikeArrayDirty.filter(dock => {
+        return dock.length >= 4 && parseInt(dock[3].split(' ')) > 20;
+      }
+    );
 
 
     /* =====================
@@ -93,13 +105,17 @@
       ext: 'png'
     }).addTo(map);
 
+
     /* =====================
 
     Start code to add markers to map
 
     ===================== */
 
-
+    for (let i= 0; i < dataFilteredDirty.length; i++){ 
+      L.marker([dataFilteredDirty[i][1], dataFilteredDirty[i][0]]).addTo(map).bindPopup(dataFilteredDirty[i][2]).openPopup;
+    }
+    
 
     /* =====================
 
