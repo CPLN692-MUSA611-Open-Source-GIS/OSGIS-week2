@@ -35,6 +35,33 @@
 
     ===================== */
 
+    // question 1
+    var sum = 0
+
+    for (var i=1; i<1000; i++){
+        if(i%3 == 0){
+            sum += i;
+        }else if(i%5 == 0){
+            sum += i;
+        }
+    }
+    console.log(sum) //233168
+
+    // question 2
+    var sumFib = 2
+    var fib = [1, 2]
+
+    while (true) {
+        next = fib[fib.length-1] + fib[fib.length-2]
+        fib.push(next)
+        if (next >= 4000000){
+            break;
+        }
+        else if (next%2==0) {
+            sumFib = sumFib + next;
+        }
+    }
+    console.log(sumFib)
 
 
     /* =====================

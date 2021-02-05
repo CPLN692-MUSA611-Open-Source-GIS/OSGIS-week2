@@ -38,6 +38,7 @@
     Here's the simplest array of arrays: [[]]
     Here's an array of arrays with two subarrays: [[], []]
 
+
     ## Task 2: Process Data
 
     Create a marker for each element in "restaurantData". Your final code should only include
@@ -86,9 +87,28 @@
 
     ===================== */
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    //create array of restaurant info
+    var restaurantData = [[39.950428, -75.169909, 'Bluestone Lane Cafe'],
+                          [39.9500246391871, -75.16214932093908, 'Barbuzzo'],
+                          [39.95482868471906, -75.15655235862185, 'Mango Mango Dessert']]
+
+    // for (var i = 0; i < restaurantData.length; i++) {
+    //     //console.log(restaurantData[i]);
+    //     L.marker(restaurantData[i]).addTo(map).bindPopup(restaurantData[i][2])
+    // }
+
+    var restaurantObjectData = []
+    for (var i = 0; i < restaurantData.length; i++) {
+        var restaurantObject = {name: restaurantData[i][2], lat: restaurantData[i][0], lng: restaurantData[i][1]}
+        restaurantObjectData.push(restaurantObject)
+    }
+    console.log(restaurantObjectData)
+
+    for (var i = 0; i < restaurantObjectData.length; i++) {
+        //console.log(restaurantData[i]);
+        L.marker([restaurantObjectData[i].lat, restaurantObjectData[i].lng])
+        .addTo(map).bindPopup(restaurantObjectData[i].name)
+    }
 
     /* =====================
 
