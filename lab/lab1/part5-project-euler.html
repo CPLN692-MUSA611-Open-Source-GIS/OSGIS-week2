@@ -34,7 +34,28 @@
     Start code
 
     ===================== */
+    var multiplies = []
 
+    function SumArr(arr){
+      var sum =0;
+      for (var i = 0; i<arr.length; i=i+1){
+        sum=sum+arr[i]
+      }
+      return sum;
+    }
+
+    for (j=0;j<1000;j=j+1){
+      if (j%3 ==0|j%5 == 0){
+        multiplies.push(j)
+      }
+      else{
+        console.log('not multiplies of 3 or 5')
+      }
+  
+    }
+    console.log(multiplies)
+
+    console.log(SumArr(multiplies))
 
 
     /* =====================

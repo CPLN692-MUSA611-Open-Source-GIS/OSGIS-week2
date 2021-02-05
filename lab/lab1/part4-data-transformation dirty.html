@@ -64,7 +64,7 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    var data = bikeArrayDirty;
 
     /* =====================
 
@@ -75,14 +75,21 @@
 
     function Filterdata(Bike){
       for (i=0;i<Bike.length;i=i+1){
-        if (Bike[i][3]>20){
-          dataFiltered.push([Bike[i][0],Bike[i][1],Bike[i][2],Bike[i][3]])
+        if (Bike[i].length==4){
+          if (parseInt(Bike[i][3])>20){
+            dataFiltered.push([Bike[i][0],Bike[i][1],Bike[i][2],Bike[i][3]])
+          }
+          else{
+            console.log('Number of bike share docks smaller or equal than 20')
+          }
         }
         else{
-          console.log('Number of bike share docks smaller or equal than 20')
+          console.log('Wrong')}
         }
-      }    
-    }
+      
+     }
+  
+
 
     Filterdata(data)
     console.log(dataFiltered)
