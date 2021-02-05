@@ -86,6 +86,7 @@
 
     ===================== */
 
+    // Task 1
     // Create an array (of arrays) to store the following info. of restaurants: 
     // [1.lat, 2.lng, 3.label]
     let restaurantData = [
@@ -96,13 +97,23 @@
       [39.95363,-75.155733, "Paris Baguette"]
     ];
 
+    // Task 2,3,4
+    // Add markers and pop-ups to map
     for (var i = 0; i < restaurantData.length; i++){
         loc = restaurantData[i];
         L.marker([loc[0],loc[1]]).addTo(map).bindPopup(loc[2]);
-    }
+    };
 
-    // Task 5 (JS conversion) in progress
-
+    // Task 5
+    // Create a new array of JS objects for restaurant data
+    objRestaurantData = [];
+    // Read the elements of the array and convert it to JS object
+    let toJSObject = (input) => {
+      objOutput = {"Name":input[2], "Longitude":input[0], "Latitude":input[1]}
+      objRestaurantData.push(objOutput); // push the JS object to the array of objects
+    };
+    restaurantData.forEach(toJSObject);
+    
     /* =====================
 
     End code
