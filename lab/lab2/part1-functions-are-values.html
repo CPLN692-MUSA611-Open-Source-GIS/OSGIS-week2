@@ -50,7 +50,7 @@
       ===================== */
 
       // Store the sum you compute in this variable:
-      var yourSum = 0;
+
 
       /**
        Refactor the work above into a few different functions that are reusable to the extent that you can.
@@ -59,7 +59,20 @@
        see if you can turn those discrete bits into functions)
        Hint2: Predicates are functions too!
       **/
-      for (var i = 0; i < theArray.length, i++) { /* Do stuff here */ }
+      var theArray = ['A short story.', 42, 55, ['Another story'], 23, 12, 2, 4, 5, 6, 'bar', 'foo'];
+      var yourSum = 0;
+      for (var i = 0; i < theArray.length; i++) {
+        var arrayValue = theArray[i];
+        var stringsum = (a, stg) => return {a + arrayValue.length};
+        var numbersum = (b, num) => return {b + num};
+        if (typeof arrayValue === 'string') {
+          yourSum = stringsum (yourSum, arrayValue)
+        } else if (typeof arrayValue === 'number') {  // Number case
+          yourSum = numbersum (yourSum, arrayValue)
+        } else {                                      // Otherwise
+          console.log("Not sure how to proceed with value:", arrayValue)
+        }
+      }
 
       /* =====================
 
