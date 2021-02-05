@@ -65,13 +65,27 @@
     ===================== */
 
     var data = bikeArrayClean;
+    var data = bikeArrayDirty;
 
     /* =====================
 
     Start code to filter data
 
     ===================== */
-
+    var data2 = [] //new array for filtered data
+    for (i = 0; i < data.length; i = i +1) {
+      if (data[i].length == 4) {
+        data2.push([parseFloat(data[i][1]),parseFloat(data[i][0]),data[i][2],parseFloat(data[i][3].split(' ')[0])]); //split "stations" off
+      }
+    }   
+    var dataFiltered = []
+    
+    for (m = 0; m < data2.length; m = m +1) {
+          if (data2[m][3] > 20) {  //filter out over 20
+            dataFiltered.push([data2[m][0],data2[m][1],data2[m][2],data2[m][3]])
+          }
+        }
+      
 
 
     /* =====================
@@ -99,8 +113,12 @@
 
     ===================== */
 
-
-
+    function add_marker (bikes) {  //map it
+      for (k = 0; k < bikes.length; k = k + 1) {
+        L.marker([bikes[k][0], bikes[k][1]]).addTo(map)
+      }
+    }
+    add_marker(dataFiltered)
     /* =====================
 
     End code to add markers to map
