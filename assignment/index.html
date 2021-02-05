@@ -79,15 +79,15 @@
             console.log(newArray)
           };
 
-    var dentist = L.icon({  //load icon for dentist
-    iconUrl: 'images/dental.png',
-    iconSize: [25, 25]});
+ 
 
   var addMarkers = function(map) {
     for (var i = 1; i < newArray.length; i = i + 1 ) {
       if (newArray[i][5] >= 19104 && newArray[i][5] <= 19149) {  //filter for zip code
         if (newArray[i][8] != "N/A") {
-         L.marker([newArray[i][1], newArray[i][0]], {icon: dentist}).bindPopup(newArray[i][3]).openPopup().addTo(map) // add dentist icons
+         L.marker([newArray[i][1], newArray[i][0]], {icon: L.icon({  //load icon for dentist
+      iconUrl: 'images/dental.png', iconSize: [25, 25]})})
+    . bindPopup(newArray[i][3]).openPopup().addTo(map) 
         } else {
          L.marker([newArray[i][1], newArray[i][0]]).bindPopup(newArray[i][3]).openPopup().addTo(map)
        }
