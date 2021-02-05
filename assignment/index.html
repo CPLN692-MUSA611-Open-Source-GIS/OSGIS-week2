@@ -82,13 +82,25 @@
         return csv
       };
 
+      var dentalIcon = L.icon({
+        iconUrl: 'images/dental-icon.png',
+        iconSize: [40,40]
+      });
 
       var addMarkers = function(map) {
         csv = jsonToCsv(healthCenters) // Grab CSV format using previous function
         for (var j = 1; j < csv.length; j++) {
           if (csv[j][5] >= 19140 && csv[j][5] <= 19149) // Filter for ZIP Codes
           {
-            L.marker([csv[j][1], csv[j][0]]).addTo(map).bindPopup(csv[j][3]).openPopup();
+            if (csv[j][8].includes('-')) // Identify dental care by looking for a '-' in the dental phone field, indicating a phone number is included. Those without dental care will have 'N/A' or similar.
+            {
+              // dental icon
+              L.marker([csv[j][1], csv[j][0]], {icon: dentalIcon}).addTo(map).bindPopup(csv[j][3]).openPopup();
+            }
+            else // Remaining health centers
+            {
+              L.marker([csv[j][1], csv[j][0]]).addTo(map).bindPopup(csv[j][3]).openPopup();
+            }
           } 
         }
       };
