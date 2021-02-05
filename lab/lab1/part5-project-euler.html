@@ -35,7 +35,15 @@
 
     ===================== */
 
+    // Problem 1: Sum of all multiples of 3 and 5 below 1000
+    
+    var sum = 0;
 
+    for (var i = 0; i < 1000; i = i+1) {
+      if (i%3 == 0 || i%5 == 0) {
+        sum = sum + i;
+      }
+    }
 
     /* =====================
 

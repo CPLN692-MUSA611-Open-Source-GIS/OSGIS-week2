@@ -64,7 +64,7 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    var data = bikeArrayDirty;    
 
     /* =====================
 
@@ -72,7 +72,17 @@
 
     ===================== */
 
+    var dataFiltered = []; // New array for filtered data
+    
+    // Filter dirty list by searching for the string part 'station' then taking the 
 
+    for (i = 0; i < data.length; ++i) {
+      for (j = 0; j < data[i].length; ++j) {
+        if (data[i][j].includes('station') && Number(data[i][j].substring(0,2)) > 20) {
+          dataFiltered.push(data[i]);
+        }
+      }
+    }
 
     /* =====================
 
@@ -99,7 +109,12 @@
 
     ===================== */
 
-
+    // Visualize filtered list of bike stations on a map with name as a pop up
+    // NB: Bike array has longitude as first value
+    // Luckily, with the filtered list, the index positions of lat, long, and name still work.
+    for (var i = 0; i < dataFiltered.length; i++) {
+      L.marker([dataFiltered[i][1], dataFiltered[i][0]]).addTo(map).bindPopup(dataFiltered[i][2]).openPopup();
+    }
 
     /* =====================
 
