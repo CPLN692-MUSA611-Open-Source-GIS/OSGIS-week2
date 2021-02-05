@@ -70,10 +70,46 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      /* Task 1 - Change the object into array */
+      var health_center_CSV = [Object.keys(healthCenters[0])]
 
+      var jsonToCsv = function(json) {
+        for (i=0;i<json.length;i=i+1){
+          health_center_CSV.push(Object.values(json[i]))
 
-      var addMarkers = function(map) {};
+        }
+        return health_center_CSV ;
+        console.log(health_center_CSV); 
+      };
+
+      jsonToCsv(healthCenters)
+      console.log(health_center_CSV)
+
+      /* Task 2 - Filter the markers in the range 19140-19149 and add icon for dental services */
+      var dentalIcon = L.icon({
+        iconUrl: 'images/tooth.png',
+        iconSize: [30,30]
+      })
+
+      var addMarkers_Filtered = function (data){
+        for (i=1;i<data.length;i=i+1){
+          if (data[i][5]<=19149 && data[i][5]>=19140){
+            if (data[i][8]!="N/A"){
+              L.marker([data[i][1],data[i][0]],{icon: dentalIcon}).bindPopup(data[i][3]).addTo(map) 
+            }
+            else{
+              L.marker([data[i][1],data[i][0]]).bindPopup(data[i][3]).addTo(map)
+            }
+
+          }
+          else{
+            console.log('out of the zipcode range')
+          }
+        }
+      }
+
+      addMarkers_Filtered(health_center_CSV)
+
 
       /* =====================
 
