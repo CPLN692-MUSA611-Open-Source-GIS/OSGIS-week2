@@ -64,7 +64,7 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    var data = bikeArrayClean;    
 
     /* =====================
 
@@ -72,7 +72,14 @@
 
     ===================== */
 
-
+    var dataFiltered = []; // New array for filtered data
+    
+    // Add all stations with >20 docks to new filtered list
+    for (var i = 0; i < bikeArrayClean.length; i++) {
+      if (bikeArrayClean[i][3] > 20) {
+        dataFiltered.push(bikeArrayClean[i]);
+      }
+    }
 
     /* =====================
 
@@ -99,13 +106,33 @@
 
     ===================== */
 
-
+    // Visualize filtered list of bike stations on a map with name as a pop up
+    // NB: Bike array has longitude as first value
+    for (var i = 0; i < dataFiltered.length; i++) {
+      L.marker([dataFiltered[i][1], dataFiltered[i][0]]).addTo(map).bindPopup(dataFiltered[i][2]).openPopup();
+    }
 
     /* =====================
 
     End code to add markers to map
 
     ===================== */
+
+    // var dataDirtyFiltered = [];
+
+    // Filter dirty list by searching for the string part 'station' then taking the 
+
+    // for (i = 0; i < bikeArrayDirty.length; ++i) {
+    //   for (j = 0; j < bikeArrayDirty[i].length; ++j) {
+    //     if (bikeArrayDirty[i][j].includes('station') && Number(bikeArrayDirty[i][j].substring(0,2)) > 20) {
+    //       dataDirtyFiltered.push(bikeArrayDirty[i]);
+    //     }
+    //   }
+    // }
+
+    // for (var i = 0; i < dataDirtyFiltered.length; i++) {
+    //   L.marker([dataDirtyFiltered[i][1], dataDirtyFiltered[i][0]]).addTo(map).bindPopup(dataDirtyFiltered[i][2]).openPopup();
+    // }
 
     </script>
   </body>
