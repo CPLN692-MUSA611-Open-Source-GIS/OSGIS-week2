@@ -111,6 +111,14 @@ restaurantData[3] = new Array ( 39.949864, -75.175968, "Four Seasons Food Market
 restaurantData[4] = new Array ( 39.950939, -75.178540, "Lost Bread" );  
 
     create_marker (restaurantData)
+
+
+//turning array of arrays into array of objects
+var arrayObject = restaurantData.map(function(item){ 
+  return { lat: item[0], lng: item[1],id: item[2]};
+});
+
+console.log(arrayObject);
     /* =====================
 
     End code

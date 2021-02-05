@@ -68,65 +68,44 @@
 
       Start code
 
+     
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
-      // A loop for summing the contents of theArray
-     
-      var jsonToCsv = function(json) {
-        let csv
-      }
-     
-      for (var i = 0; i < theArray.length; i++) {
-        var arrayValue = theArray[i];
-        if (typeof arrayValue === 'string') {         // String case
-          exampleSum = exampleSum + arrayValue.length
-        } else if (typeof arrayValue === 'number') {  // Number case
-          exampleSum = exampleSum + arrayValue
-        } else {                                      // Otherwise
-          console.log("Not sure how to proceed with value:", arrayValue)
-        }
-      }
+      var LoadArray = function(json) {
+          newArray = [Object.keys(json[0])] //extract column headers
+         for (var i = 0; i < json.length; i = i + 1 ) {  //loop through and add to array
+          newArray.push(Object.values(json[i]))
+          };
+            console.log(newArray)
+          };
 
-      var addMarkers = function(map) {};
+    var dentist = L.icon({  //load icon for dentist
+    iconUrl: 'images/dental.png',
+    iconSize: [25, 25]});
 
-
-// code?
-      var jsonToCsv = function(json) { 
-        let csv = []
-        csv[0] = Object.keys(json[0])    // start with the column name - KY
-        for (i = 0; i < json.length; i = i +1) {
-          row = Object.values(json[i])   // get the values in one array - KY
-          csv[i+1] = row     // attach the array of values to the final dataset - KY
-          }
-        return csv;
+  var addMarkers = function(map) {
+    for (var i = 1; i < newArray.length; i = i + 1 ) {
+      if (newArray[i][5] >= 19104 && newArray[i][5] <= 19149) {  //filter for zip code
+        if (newArray[i][8] != "N/A") {
+         L.marker([newArray[i][1], newArray[i][0]], {icon: dentist}).bindPopup(newArray[i][3]).openPopup().addTo(map) // add dentist icons
+        } else {
+         L.marker([newArray[i][1], newArray[i][0]]).bindPopup(newArray[i][3]).openPopup().addTo(map)
+       }
       };
+    }
+  };
 
-      var addMarkers = function(map) {
-        csv = jsonToCsv(healthCenters)
-        for (k = 1; k < csv.length; k = k + 1) {
-          if (csv[k][5] > 19140 & csv[k][5] < 19149) {
-          L.marker([csv[k][1], csv[k][0]]).addTo(map).bindPopup(csv[k][3]).openPopup()
-            if (csv[k][8] != "N/A") {
-              myIcon = L.icon ({
-                iconUrl: 'dental_icon.png',
-                iconSize: [35, 35]
-              })
-              L.marker([csv[k][1], csv[k][0]],{icon:myIcon}).addTo(map)
-            }
-          }
-        }
-      };
+  LoadArray(healthCenters);
+  addMarkers(map);
+    
+
       /* =====================
 
       End code
 
       ===================== */
 
-
-      // `healthCenters` is defined in health_centers.js
-      jsonToCsv(healthCenters);
-      addMarkers(map);
+     
     </script>
     <!--Your code ends here-->
   </body>

@@ -34,6 +34,21 @@
     Start code
 
     ===================== */
+    var sumNums = new Array ( );
+
+    for (var i=0; i < 1000; i=i+1){
+    if (i % 15 == 0) sumNums.push(i);
+    else if (i % 3 == 0&& i % 5>0) sumNums.push(i);
+    else if (i % 5 == 0&& i % 3>0) sumNums.push(i);
+    else other = [i];
+}
+    var sum = sumNums.reduce(function(a, b){
+          return a + b;
+     }, 0);
+    
+    console.log(sum); 
+
+// Correct answer is 233168!
 
 
 
