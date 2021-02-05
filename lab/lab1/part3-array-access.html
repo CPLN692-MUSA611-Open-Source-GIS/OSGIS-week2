@@ -86,9 +86,40 @@
 
     ===================== */
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    /*
+    var restaurantData = [
+    [39.95392062044402, -75.19754126455331,"Food Truck"],
+    [39.94524668627359, -75.17707948833389,"Honey's Sit 'N Eat"],
+    [39.95490350663227, -75.20012924819308,"Beilers Doughnuts"]
+    ]
+
+    for(var i = 0; i <restaurantData.length + 1;i = i+1){
+      L.marker([restaurantData[i][0],restaurantData[i][1]]).addTo(map).bindPopup(restaurantData[i][2]);
+    }
+    */
+  
+    var restaurantData = [
+      {
+        lat: 39.95392062044402,
+        lng: -75.19754126455331,
+        label: "Food Truck"
+      },
+      {
+        lat: 39.94524668627359,
+        lng: -75.17707948833389,
+        label: "Honey's Sit 'N Eat"
+      },
+      {
+        lat: 39.95490350663227,
+        lng: -75.20012924819308,
+        label: "Beilers Doughnuts"
+      }
+    ]
+    for(var i = 0; i <restaurantData.length;i = i+1){
+      L.marker([restaurantData[i].lat,restaurantData[i].lng]).addTo(map).bindPopup(restaurantData[i].label)
+    }
+    
+
 
     /* =====================
 
