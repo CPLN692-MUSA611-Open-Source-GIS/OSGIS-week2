@@ -63,17 +63,25 @@
     and in tackling real programming challenges)
 
     ===================== */
-
+    /* =====================
+    var map = L.map('map', {
+      center: [39.9522, -75.1639],
+      zoom: 14
+    });
+    ===================== */
     var data = bikeArrayClean;
+    //L.marker([-75.21175063283816, 39.9558508645567]).addTo(map);
 
     /* =====================
 
     Start code to filter data
 
     ===================== */
-
-
-
+    var dataFiltered = [];
+    for (i = 0; i < data.length; i++){
+      if (data[i][3] > 20) {dataFiltered.push([data[i][0], data[i][1], data[i][2], data[i][3]])}
+    }
+    //console.log(dataFiltered)
     /* =====================
 
     End code to filter data
@@ -99,6 +107,21 @@
 
     ===================== */
 
+    //L.Marker([dataFiltered[0][1], dataFiltered[0][0]]).addTo(map)
+    //L.marker([39.95378, -75.16374]).addTo(map)
+
+
+
+
+
+    for (j = 0; j < dataFiltered.length; j++){
+      console.log(dataFiltered[j]);
+      var markerLocation = new L.LatLng(dataFiltered[j][1], dataFiltered[j][0]);
+      var markers = new L.Marker(markerLocation).bindPopup(dataFiltered[j][2]);
+      //marker.bindPopup(dataFiltered[j][3]);
+      //use string for popups
+      map.addLayer(markers);
+    };
 
 
     /* =====================
