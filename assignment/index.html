@@ -19,8 +19,8 @@
     <!--Your code starts here-->
     <script>
       var map = L.map('map', {
-        center: [39.9522, -75.1639],
-        zoom: 14
+        center: [39.9782, -75.1639],
+        zoom: 12
       });
       var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -41,7 +41,7 @@
 
        1. Log a series of arrays to the console that represents the health_centers dataset
        in an array of arrays. For example, [{'first': 1, 'second': 44}, {'first': 2, 'second': 12}]
-       becomes [['first','second'],[1, 44],[2, 12]]. (Hint: Review Lab2, part4 which
+       becomes [['first','second'],[1, 44],[2, 12]]. (Hint: Review Lab1, part4 which
        deals with a similar issue)
 
        Reflect on how similar this array of arrays is to common CSV structure and how objects can
@@ -70,22 +70,72 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      var data = healthCenters;
 
+      // Extract the column names
+      var healthCenterCSV = [Object.keys(data[0])];
 
-      var addMarkers = function(map) {};
+      // Function to iterate through the dataset and append values to the output csv-like data
+      // Input: Json 
+      // Output: Array
+      var jsonToCsv = function(json) {
+        for (i=0;i<json.length;i=i+1){
+          healthCenterCSV.push(Object.values(json[i]))
+        }
+        console.log(healthCenterCSV)
+        return healthCenterCSV ;
+      };
 
+      // `healthCenters` is defined in health_centers.js
+      jsonToCsv(healthCenters);
+
+      var healthCenterSelected = [];
+      // Helper Function to filter out entries not in the range 19140-19149 (zip code)
+      // Input: Array
+      // Output: Array (append qualified input array to healthCenterSelected)
+      var zipCodeFilter = function(jsonEntry){
+        if (jsonEntry['ZIP'] >= 19140 & jsonEntry['ZIP'] <= 19149){ // check if the zip code lies in the range
+          healthCenterSelected.push(jsonEntry);
+        } 
+      }
+      data.forEach(zipCodeFilter);
+      console.log(healthCenterSelected)
+
+      // Add customized icon for health centers with dental services
+      var myIcon = L.icon({
+        iconUrl: 'dental-care.png',
+        iconSize: [45, 45],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76]
+      });
+
+      // Function to set up markers for selected locations
+      // Input: Map
+      // Output: Map with markers & pop-ups
+      var addMarkers = function(map) {
+        for (var i = 0; i < healthCenterSelected.length; i++){
+
+          if (healthCenterSelected[i].DENTAL_PHONE != 'N/A'){ // check if the health center has dental_phone info. available
+            L.marker([healthCenterSelected[i].LAT, healthCenterSelected[i].LNG], {icon: myIcon}).addTo(map).bindPopup(healthCenterSelected[i].NAME);
+          } else {
+            L.marker([healthCenterSelected[i].LAT, healthCenterSelected[i].LNG]).addTo(map).bindPopup(healthCenterSelected[i].NAME);
+          }
+        }
+      }
       /* =====================
 
       End code
 
       ===================== */
 
-
-      // `healthCenters` is defined in health_centers.js
-      jsonToCsv(healthCenters);
       addMarkers(map);
+
     </script>
     <!--Your code ends here-->
+    <h1>Health Care Map</h1>
+    <p> for zip code 19140~19149
+    <h3>With Dental Services Highlighted</h3>
+
+    <div>Dental Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a></br> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
   </body>
 </html>
