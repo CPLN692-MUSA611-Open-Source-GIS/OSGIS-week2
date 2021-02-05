@@ -106,14 +106,14 @@
 
     // Task 5
     // Create a new array of JS objects for restaurant data
-    objRestaurantData = [];
+    var objRestaurantData = [];
     // Read the elements of the array and convert it to JS object
     let toJSObject = (input) => {
       objOutput = {"Name":input[2], "Longitude":input[0], "Latitude":input[1]}
       objRestaurantData.push(objOutput); // push the JS object to the array of objects
     };
     restaurantData.forEach(toJSObject);
-    
+
     /* =====================
 
     End code

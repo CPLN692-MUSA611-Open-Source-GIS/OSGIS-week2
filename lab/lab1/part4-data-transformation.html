@@ -63,17 +63,53 @@
     and in tackling real programming challenges)
 
     ===================== */
-
-    var data = bikeArrayClean;
-    // var data = bikeArrayDirty;
+    
+    // var data = bikeArrayClean;// for working with cleaned data
+    var data = bikeArrayDirty; // for working with dirty data
 
     /* =====================
 
     Start code to filter data
 
     ===================== */
+    
+    var dataFiltered = []; // create an empty array to store the filtered data
+    
+    // Work with Clean Data
+    // let filterMoreThan20Docks = (inputArray) => {
+    //   if(inputArray[3] >= 20){
+    //     dataFiltered.push(inputArray);
+    //   }
+    // };
+    // Work with Dirty Data
+    let filterMoreThan20Docks = (inputArray) => {
+      // Step 1: filter out data entries without info. about #docks
+      if(inputArray.length >= 4){
+        // Step 2: check if the first element of the data entry starts with a string containing numeric element 
+        if (parseFloat(inputArray[0]) < 0){
+          tempArray = [parseFloat(inputArray[0]), // lng
+                      parseFloat(inputArray[1]), // lat
+                      inputArray[2], // name
+                      parseInt(inputArray[3])]; // # of docks
+          console.log(tempArray)
+        }
+        // Otherwise, we can process the second element (this only works for part4-data-dirty)
+        // For more general uses, we can use a loop to locate the index for coordinates 
+        else{
+          tempArray = [parseFloat(inputArray[1]), // lng
+                      parseFloat(inputArray[2]), // lat
+                      inputArray[3], // name
+                      parseInt(inputArray[4])]; // # of docks
+        }
+        if (tempArray[3] >= 20){
+          dataFiltered.push(tempArray);
+        }
+      }
+    };
 
-
+    // Read each element and filter out bike share stations with more than 20 docks
+    data.forEach(filterMoreThan20Docks);
+    console.log(dataFiltered)
 
     /* =====================
 
@@ -100,8 +136,11 @@
 
     ===================== */
 
-
-
+    // Add markers and pop-ups to map
+    for (var i = 0; i < dataFiltered.length; i++){
+        loc = dataFiltered[i];
+        L.marker([loc[1],loc[0]]).addTo(map).bindPopup(loc[2] +' | '+ loc[3] + ' Docks Available.' );
+    };
     /* =====================
 
     End code to add markers to map
