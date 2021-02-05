@@ -64,7 +64,7 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    var data = bikeArrayDirty;
 
     /* =====================
 
@@ -72,6 +72,66 @@
 
     ===================== */
 
+    var map = L.map('map', {
+      center: [39.9522, -75.1639],
+      zoom: 14
+    });
+
+    // for (var i = 0; i < data.length; i++) {
+    //     //console.log(restaurantData[i]);
+    //     if (data[i][3]>20) {
+    //         console.log(data[i][3])
+    //         console.log([data[i][1],data[i][0]])
+    //         // var location = [data[i][1],data[i][0]]
+    //         // console.log(location)
+    //         L.marker([data[i][1],data[i][0]]).addTo(map).bindPopup(data[i][2])
+    //     }
+    // }
+
+    var cleanArray = []
+
+    for (var i = 0; i < data.length; i++) {
+        var station = data[i]
+        // var cleanStationArray=[]
+        var lat = 'NA'
+        var lng = 'NA'
+        var stations = 'NA'
+        var name = 'NA'
+
+        // iterate through each info entry for each station
+        for (var j=0; j<station.length; j++){
+            if (station[j].includes('39')){
+                lat = parseFloat(station[j])
+            }else if (station[j].includes('-75')){
+                lng = parseFloat(station[j])
+            }else if (station[j].includes('stations')){
+                stations = parseInt(station[j].substr(0, station[j].indexOf(' ')))
+            }else if (station[j].includes('CSV')){
+                console.log('caught dirty data!')
+            }else{
+                name = station[j]
+            }
+
+            // save most updated station info array
+            if(j==station.length-1){
+                cleanArray.push([lat, lng, stations, name])
+            }
+        }
+    }
+
+    console.log(cleanArray)
+
+    for (var k = 0; k < cleanArray.length; k++) {
+        console.log("In Marker Loop!")
+        console.log(cleanArray[k])
+        console.log(cleanArray[k][1])
+        if (cleanArray[k][2]>20) {
+            console.log([cleanArray[k][1],cleanArray[k][0]])
+            // var location = [data[i][1],data[i][0]]
+            // console.log(location)
+            L.marker([cleanArray[k][0],cleanArray[k][1]]).addTo(map).bindPopup(data[k][2])
+        }
+    }
 
 
     /* =====================
@@ -80,10 +140,7 @@
 
     ===================== */
 
-    var map = L.map('map', {
-      center: [39.9522, -75.1639],
-      zoom: 14
-    });
+
 
     var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
       attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',

@@ -48,7 +48,7 @@
        be mapped to csv rows.
 
        2. Put a marker on the map for each health center with a popup (a simple text dialog) that
-       shows that location's name when its marker is clicked. 
+       shows that location's name when its marker is clicked.
 
        Hint: https://leafletjs.com/reference-1.7.1.html#popup
 
@@ -72,8 +72,36 @@
 
       var jsonToCsv = function(json) { console.log(json); };
 
+      // change array format to array of arrays
+      function formatArray(json){
+          var array = [Object.keys(json[0])]
+          for (var i=0; i<json.length; i++){
+              array.push(Object.values(json[i]))
+          }
+          return array
+      }
+      var healthCentersArray = formatArray(healthCenters)
 
-      var addMarkers = function(map) {};
+
+      var toothIcon = L.icon ({
+          iconUrl: './images/teeth.png',
+          iconSize: [30, 30],
+      })
+
+      var addMarkers = function(map) {
+          for (var i = 1; i < healthCentersArray.length; i++) {
+              if(healthCentersArray[i][5]>=19140 && healthCentersArray[i][5] <= 19149){ //check zipcode
+
+                  var location = [healthCentersArray[i][1], healthCentersArray[i][0]]
+
+                  if (healthCentersArray[i][8] != 'N/A'){ //check dental service
+                      L.marker(location, {icon:toothIcon}).addTo(map).bindPopup(healthCentersArray[i][3]) //
+                  }else{
+                      L.marker(location).addTo(map).bindPopup(healthCentersArray[i][3])
+                  }
+              }
+          }
+      };
 
       /* =====================
 
