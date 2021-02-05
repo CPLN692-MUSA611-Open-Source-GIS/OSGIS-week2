@@ -20,6 +20,13 @@
     (Multiples of 3 and 5). To check your answer, create an account and you
     will be able to submit your final result.
 
+    Problem 1:
+
+    If we list all the natural numbers below 10 that are multiples of 3 or 5, 
+    we get 3, 5, 6 and 9. 
+    The sum of these multiples is 23.
+    Find the sum of all the multiples of 3 or 5 below 1000.
+
     If you complete problem 1, move on to problem 2!
 
     Successfully completing a project Euler problem will be noted as extra effort
@@ -34,8 +41,18 @@
     Start code
 
     ===================== */
-
-
+    
+    var sum = 0; // initialize the sum variable outside the loop
+    
+    for (var i = 1; i <= 1000; i++){ // iterate from 1 to 999
+      if (i % 3 == 0 & i % 5 == 0){ // check if the number is a multiple of both 3 and 5
+        sum += i;
+      } else if (i % 3 == 0) { // otherwise, check if the number is a multiple of 3
+        sum += i;
+      } else if (i % 5 == 0) { // otherwise, check if the number is a muptiple of 5
+        sum += i;
+      }
+    }
 
     /* =====================
 
