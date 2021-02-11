@@ -48,10 +48,6 @@
       Start code
 
       ===================== */
-
-      // Store the sum you compute in this variable:
-      var yourSum = 0;
-
       /**
        Refactor the work above into a few different functions that are reusable to the extent that you can.
 
@@ -59,7 +55,24 @@
        see if you can turn those discrete bits into functions)
        Hint2: Predicates are functions too!
       **/
-      for (var i = 0; i < theArray.length, i++) { /* Do stuff here */ }
+  
+    let calSum =  function(array) {
+      var sum = 0
+      for (var i = 0; i < array.length; i = i + 1) {
+        if (typeof array[i] === 'string') {
+          sum = sum + array[i].length
+        } else if (typeof array[i] === 'number') {
+          sum = sum + array[i]
+        } else {
+          console.log("Not sure how to proceed with value:", array[i])
+        }
+      }
+      return sum
+    }
+
+    // Store the sum you compute in this variable:
+    var yourSum = calSum(theArray);
+    
 
       /* =====================
 

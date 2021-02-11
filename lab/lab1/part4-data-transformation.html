@@ -24,7 +24,7 @@
 
     /* =====================
 
-    # Lab 2, Part 2 — Data Transformation
+    # Lab 1, Part 2 — Data Transformation
 
     ## Introduction
 
@@ -64,14 +64,53 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    var data = bikeArrayDirty;
 
     /* =====================
 
     Start code to filter data
 
     ===================== */
+    
+    //function filter (data) {
+      //var arrayLen = data.length;
+      //var filtered = [];
+      //for (var i=0; i<arrayLen; i=i+1) {
+        //if(data[i][3] > 20) {
+          //filtered.push(data[i])
+        //}
+      //}
+      //return filtered;
+    //}
 
+    //var dataFiltered = filter(data)
+
+  //dirty data--function to filter out data which loss information
+  function lossinfo (data) {
+    var lossParameter = [];
+    for (var i=0; i<data.length; i++) {
+      if (data[i].length == 2 | data[i].length == 3 | data[i].length == 1) {
+        lossParameter.push(data[i])
+      }
+    }
+    return lossParameter
+  }
+
+  function fullinfo (data) {
+    var fourParameter = [];
+    for (var i=0; i<data.length; i++) {
+      if (data[i].length == 4) {
+        fourParameter.push(data[i])
+      }
+    }
+    return fourParameter
+  }
+
+  
+  //global variables
+  var fullData = fullinfo(data)
+  var lossData = lossinfo(data)
+  
 
 
     /* =====================
@@ -98,8 +137,33 @@
     Start code to add markers to map
 
     ===================== */
+    //for (var i=0; i<dataFiltered.length; i=i+1) {
+      //marker = L.marker([dataFiltered[i][1], dataFiltered[i][0]]).bindPopup('avaiable bikes: ' + dataFiltered[i][3]).openPopup().addTo(map)
+    //}
 
 
+
+    //map out the data which do not have missing data
+    for (var i=0; i<fullData.length; i++) {
+      marker = L.marker([fullData[i][1], fullData[i][0]]).bindPopup('Address: ' + fullData[i][2] + ' with ' + fullData[i][3] + '.').openPopup().addTo(map)
+    }
+
+
+
+    //code referenced from Leaflet
+    var myIcon = L.icon({
+        iconUrl: "https://cdn3.iconfinder.com/data/icons/location-pointer/100/map_pointer_pin_marker_location-02-512.png",
+        iconSize: [55, 55], // size of the icon
+        popupAnchor: [0,-15]
+        });
+ 
+
+    //map out the data which have missing info
+    for (var i=0; i<lossData.length; i++) {
+      marker = L.marker([lossData[i][1], lossData[i][0]], {icon:  myIcon}).
+      bindPopup('Stations where loss related information').openPopup().
+      addTo(map);
+    }
 
     /* =====================
 
