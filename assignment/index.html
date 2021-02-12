@@ -47,9 +47,15 @@
        Reflect on how similar this array of arrays is to common CSV structure and how objects can
        be mapped to csv rows.
 
+*/
+/*
+
        2. Put a marker on the map for each health center with a popup (a simple text dialog) that
        shows that location's name when its marker is clicked. 
 
+*/
+/*
+       
        Hint: https://leafletjs.com/reference-1.7.1.html#popup
 
        3. All and only markers found within the zip code range from 19140 to 19149 should appear.
@@ -70,10 +76,29 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      
+var jsonConvert = function(json){
+  var input = [];
+  var output = [];
+  output[0] = Object.keys(json[0])
+  for (let i = 1; i < json.length; i++) {
+output.push(Object.values(json[i]))
+  }
+  return output
+} 
+  
 
+var markers = function(data) {
+  dataFiltered = data.filter(item => item[3] > value)
+        for(let i = 1; i < data.length; i = i++){
+          if (data[i][5] >= 19140 && data[i][5] <= 19149) {
+          L.marker([data[i][1],data[i][0]]).addTo(map).bindPopup(data[i][3]).openPopup;
+          }
+        }
+      };
 
-      var addMarkers = function(map) {};
+markers(jsonConvert(healthCenters));
+
 
       /* =====================
 

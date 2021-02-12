@@ -68,10 +68,15 @@
 
     /* =====================
 
-    Start code to filter data
+  
 
     ===================== */
 
+let value = 20
+
+dataFiltered = data.filter(item => item[3] > value)
+
+console.log(dataFiltered)
 
 
     /* =====================
@@ -79,6 +84,7 @@
     End code to filter data
 
     ===================== */
+
 
     var map = L.map('map', {
       center: [39.9522, -75.1639],
@@ -98,7 +104,25 @@
     Start code to add markers to map
 
     ===================== */
+    for (let i = 0; i < dataFiltered.length; i++){ 
+      L.marker([dataFiltered[i][1], dataFiltered[i][0]]).addTo(map).bindPopup(dataFiltered[i][2]).openPopup; 
+      i++
+    }
 
+
+    var data2 = bikeArrayDirty;
+    let value2 = 20
+
+    let dataFilteredDirty = bikeArrayDirty.filter(dock => {
+        return dock.length >= 4 && parseInt(dock[3].split(' ')) > value2;
+      }
+    );
+
+console.log(dataFilteredDirty)
+
+    for (let i= 0; i < dataFilteredDirty.length; i++){ 
+      L.marker([dataFilteredDirty[i][1], dataFilteredDirty[i][0]]).addTo(map).bindPopup(dataFilteredDirty[i][2]).openPopup;
+    }
 
 
     /* =====================

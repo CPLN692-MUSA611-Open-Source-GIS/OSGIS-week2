@@ -38,12 +38,37 @@
     Here's the simplest array of arrays: [[]]
     Here's an array of arrays with two subarrays: [[], []]
 
+===================== */
+let restaurantData = [[],[],[]];
+
+ /* =====================
+
     ## Task 2: Process Data
 
     Create a marker for each element in "restaurantData". Your final code should only include
     "L.marker" one time.
 
+===================== */
+var restaurantData = [[39.96034309229206, 39.95455336128986, 39.95022427203073, 39.95847700727588, 39.949345], [-75.19662044328308, -75.2021405440663, -75.16982908268764, -75.19287100173842, -75.166862], 
+    ["Hummus Grill", "Spring Chinese", "Pietros", "Ed's Wing and Pizza", "Chipotle"]]
+
+let i = 0;
+
+while (i < restaurantData[0].length){ 
+    for (let i= 0; i < restaurantData[0].length; i++){ 
+      L.marker([restaurantData[0][i], restaurantData[1][i]]).addTo(map).bindPopup(restaurantData[2][i]).openPopup; 
+      i++
+    }
+
+
+ /* =====================
+
     ## Task 3: Add Two Additional Markers
+
+===================== */
+
+
+ /* =====================
 
     Add two additional restaurants to your data. You should only need to modify "restaurantData"
     to do this. Confirm that these new markers are added to your application.
@@ -52,6 +77,11 @@
 
     Add popups to your markers. The popup should contain the label for your restaurant. Refer
     to the Leaflet documentation for instructions on adding a popup: http://leafletjs.com/reference.html#popup
+
+===================== */
+
+
+/* =====================
 
     ## Task 5: Convert to JS Objects
 
@@ -66,6 +96,19 @@
     for keeping track of data and organizing applications around that data
 
     ===================== */
+
+    restaurantData = 
+      [{Name: "HummusGrill", lat:39.96034309229206, lng:-75.19662044328308}, 
+       {Name: "SpringChinese", lat:39.95455336128986, lng:-75.2021405440663},
+       {Name: "Pietros", lat:39.95022427203073, lng: -75.16982908268764}, 
+       {Name: "Ed's Buffalo Wings and Pizza", lat:39.95847700727588, lng:-75.19287100173842}, 
+       {Name: "Chipotle", lat:39.949345, lng:-75.166862}
+  ] 
+
+  for (let i = 0; i < restaurantData.length; i++){ 
+    L.marker([restaurantData[i]["lat"], restaurantData[i]["lng"]]).addTo(map).bindPopup(restaurantData[i]["Name"]).openPopup;
+} 
+ 
 
     var map = L.map('map', {
       center: [39.9522, -75.1639],
