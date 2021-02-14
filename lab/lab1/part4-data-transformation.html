@@ -64,14 +64,42 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    //var data = bikeArrayClean;
+    var data = bikeArrayDirty;
+    data.forEach(function(item) {
+      item[0] = parseFloat(item[0]);
+      item[1] = parseFloat(item[1]);
+      if(item.length==2){
+        item[2] = '';
+        item[3] = 0;
+      }
+      else if(item.length==3){
+        if(item[2].includes("station")){
+          item[3] = parseFloat(item[2]);
+          item[2] = '';
+        }
+        else{
+          item[3] = 0;
+        }
+      }
+      else{
+        item[3] = parseFloat(item[3]);
+      }
+    });
 
     /* =====================
 
     Start code to filter data
 
     ===================== */
+    dataFiltered= []
+    data.forEach(function(item) {
+      if(item[3]>20){
+        dataFiltered.push(item)
+      }
+    });
 
+    console.log(dataFiltered);
 
 
     /* =====================
@@ -98,7 +126,9 @@
     Start code to add markers to map
 
     ===================== */
-
+    dataFiltered.forEach(function(item) {
+      L.marker([item[1], item[0]]).addTo(map);
+    });
 
 
     /* =====================

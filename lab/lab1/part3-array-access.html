@@ -86,9 +86,32 @@
 
     ===================== */
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    //Restaurant array
+    restaurantData=[[39.96000445664437, -75.19063211752054, "Sabrina's Cafe"],
+    [39.95228762601507, -75.17471302054324, "JJ Thai Cuisine"],
+    [39.95474788832882, -75.1937667669392, "Sang Kee Noodle House"]];
+
+    //Create markers
+    restaurantData.forEach(function(item) {
+      L.marker([item[0], item[1]]).addTo(map);
+    });
+
+    //Add Popups to Markers
+    restaurantData.forEach(function(item) {
+      L.marker([item[0], item[1]]).bindPopup(item[2]).addTo(map).openPopup();
+    });
+
+    //Convert to JS Objects
+    objArray = [];
+    restaurantData.forEach(function(item) {
+      objArray.push({
+        lat: item[0],
+        lng: item[1],
+        label: item[2]
+      })
+    });
+    console.log(objArray);
+
 
     /* =====================
 

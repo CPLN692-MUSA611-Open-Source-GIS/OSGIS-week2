@@ -70,10 +70,43 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      var jsonToCsv = function(json) { 
+        var csvArray=[]
+        csvArray[0] = Object.keys(json[0])
+        json.forEach(function(item,index) {
+          if(index>=1){
+            csvArray[index] = Object.values(item)
+          }
+        });
+        console.log(csvArray);
+        return csvArray;
+       };
 
+      var dentalIcon = L.icon({
+        iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+        iconSize: [38, 95],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76],
+        shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+        shadowSize: [68, 95],
+        shadowAnchor: [22, 94]
+      });
 
-      var addMarkers = function(map) {};
+      var addMarkers = function(map) {
+        csv = jsonToCsv(healthCenters);
+        var sum = 0;
+        csv.forEach(function(item,index) {
+          if(index>=1 && item[5]>19140 && item[5]<19149){
+            sum+=1;
+            if(item[8]!='N/A'){
+              L.marker([item[1], item[0]], {icon: dentalIcon}).bindPopup(item[3]).addTo(map).openPopup();
+            }
+            else{
+              L.marker([item[1], item[0]]).bindPopup(item[3]).addTo(map).openPopup();}
+          }
+        });  
+        console.log(sum);  
+      };
 
       /* =====================
 
