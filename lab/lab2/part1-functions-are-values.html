@@ -59,7 +59,35 @@
        see if you can turn those discrete bits into functions)
        Hint2: Predicates are functions too!
       **/
-      for (var i = 0; i < theArray.length, i++) { /* Do stuff here */ }
+
+      function isString(x){
+        if (typeof x == 'string') {         
+          return x.length;
+        }
+        else{
+          return 0;
+        }
+      }
+      function isNumber(x){
+        if (typeof x == 'number') {         
+          return x;
+        }
+        else{
+          return 0;
+        }
+      }
+      function isOther(x){
+        if (typeof x != 'string' && typeof x != 'number') {       
+          console.log("Not sure how to proceed with value:", arrayValue);  
+        }
+      }
+
+      for (var i = 0; i < theArray.length; i++) {
+        var arrayValue = theArray[i];
+        yourSum+=isString(arrayValue);
+        yourSum+=isNumber(arrayValue);
+        isOther(arrayValue);
+       }
 
       /* =====================
 
