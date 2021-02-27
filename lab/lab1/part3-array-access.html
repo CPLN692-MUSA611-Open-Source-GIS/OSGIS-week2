@@ -86,24 +86,25 @@
 
     ===================== */
 
-    //Task 1//
-
-    restaurant1 = [39.95218647730202, -75.17471970661114, "Fuji Mountain Japanese Restaurant"];
-    restaurant2 = [39.95674308289997, -75.15720098914377, "Vietnam Restaurant"];
-    restaurantData = [restaurant1, restaurant2];
+    //Create an array of arrays
+    restaurantData = [[39.95218647730202, -75.17471970661114, "Fuji Mountain Japanese Restaurant"]];
+      
+    //Add 2 restaurants to the array
+    restaurantData.push([39.95614473592909, -75.16901965014638, "Chops Restaurant and Bar"],[39.95206548980207, -75.16232485688896, "El Vez"]);
     
-    //Task 2 & 3 & 4//
-
-    restaurant3 = [39.95614473592909, -75.16901965014638, "Chops Restaurant and Bar"];
-    restaurant4 = [39.95206548980207, -75.16232485688896, "El Vez"];
-
-    restaurantData.push(restaurant3,restaurant4);
-
-    restaurantData.forEach(element => {
-      var marker = L.marker([element[0], element[1]]).addTo(map)
-      marker.bindPopup(element[2]);
+    //Create markers with popup
+    restaurantData.forEach(item => {
+      var marker = L.marker([item[0], item[1]]).addTo(map)
+      marker.bindPopup(item[2]);
     });
-    
+
+    //Convert to JS Object
+    objArray = [];
+    restaurantData.forEach(item => {
+      obj = {lat: item[0], lng: item[1], label: item[2]}
+      objArray.push(obj);
+    });
+    console.log(objArray);
 
     /* =====================
 
