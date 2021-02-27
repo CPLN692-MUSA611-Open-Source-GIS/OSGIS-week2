@@ -50,6 +50,50 @@
       // feel free to comment this line out if it is too noisy in your console!
       console.log(healthCentersCSV)
 
+      // Create 2 arrays to store this data as an array of arrays and an array of objects separately
+      var splitArrayOfArrays = [];
+      var splitArrayOfObjects = [];
+      var stringToSplit = healthCentersCSV;
+      // Split the CSV into rows
+      var stringArray = splitString(stringToSplit, ";")
+  
+      // Split each row and store it as an array and a object
+      for (var i = 0; i < stringArray.length; i++){
+        splitArrayOfArrays.push(splitString (stringArray[i], ","));
+        if (i > 0){
+          splitArrayOfObjects.push(arrayToObej(splitString (stringArray[i], ",")));
+        }
+      }
+
+      // Function to split the string with the given separator, return the array with the result
+      function splitString(theString, separator){
+        var stringArray = theString.split(separator);
+        return stringArray;
+      }
+
+      // Function to change the given array to an object
+      function arrayToObej(values){
+        var obj = {LNG: values[0], 
+          LATk: values[1], 
+          OBJECTID: values[2], 
+          NAME: values[3], 
+          ORGANIZATION: values[4], 
+          ZIP: values[5], 
+          PHONE: values[6], 
+          WEBSITE: values[7], 
+          DENTAL_PHONE: values[8],
+          FULL_ADDRESS: values[9]};
+        return obj;
+      }
+
+
+
+      console.log(splitArrayOfArrays);
+      console.log(splitArrayOfObjects);
+
+
+
+
       /* =====================
 
       End code
