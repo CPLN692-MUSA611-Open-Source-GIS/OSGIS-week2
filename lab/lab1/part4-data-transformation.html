@@ -64,14 +64,65 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
-
+    
     /* =====================
 
     Start code to filter data
 
     ===================== */
 
+    //Deal with the dirty data
+
+    //var data = bikeArrayClean;
+
+    var data = bikeArrayDirty;
+    
+    /*data.forEach(item =>{
+      item[0] = Number(item[0]);
+      item[1] = Number(item[1]);
+      if (item.length == 2){
+        item[2] = "";
+        item[3] = 0;
+      } else if (item.length == 3){
+        if (item[2].includes("stations")){
+          item[3] = parseInt(item[2]);
+          item[2] = "";
+        } else{
+          item[3] = 0;
+        }
+      } else{
+        item[3] = parseInt(item[3]);
+      }
+    });*/
+
+    data.forEach(dataNew);
+    function dataNew(item){
+      item[0] = Number(item[0]);
+      item[1] = Number(item[1]);
+      if (item.length == 2){
+        item[2] = "";
+        item[3] = 0;
+      } else if (item.length == 3){
+        if (item[2].includes("stations")){
+          item[3] = parseInt(item[2]);
+          item[2] = "";
+        } else{
+          item[3] = 0;
+        }
+      } else{
+        item[3] = parseInt(item[3]);
+      }
+    }
+
+
+    //Create a new array for locations with more than 20 docks
+    
+    dataFiltered = [];
+    data.forEach(item => {
+      if (item[3] > 20){
+        dataFiltered.push(item);
+      }      
+    });
 
 
     /* =====================
@@ -99,7 +150,10 @@
 
     ===================== */
 
-
+    //Add markers for each location
+    dataFiltered.forEach(item =>{
+      L.marker([item[1], item[0]]). addTo(map);
+    });
 
     /* =====================
 
