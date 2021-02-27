@@ -48,7 +48,7 @@
       Start code
 
       ===================== */
-
+      var theArray = ['A short story.', 42, 55, ['Another story'], 23, 12, 2, 4, 5, 6, 'bar', 'foo'];
       // Store the sum you compute in this variable:
       var yourSum = 0;
 
@@ -59,8 +59,36 @@
        see if you can turn those discrete bits into functions)
        Hint2: Predicates are functions too!
       **/
-      for (var i = 0; i < theArray.length, i++) { /* Do stuff here */ }
+      for (var i = 0; i < theArray.length; i++){
+        yourSum = addSum(arrayValue, yourSum);
+      }
 
+      //Function to calculate the sum
+      function addSum(item, currentSum){
+        if (isString(item)){
+          return (currentSum + item.length);
+        } else if (isNumber(item)){
+          return (currentSum + item);
+        } else{
+          printError(item);
+          return currentSum;
+        } 
+      }
+
+      //Function to print message for items that are not strings or numbers
+      function printError(item){
+        console.log("Not sure how to proceed with value:", item);
+      }
+
+      //Function to check whether it is a string, return a boolean
+      function isString(item){
+        return (typeof item === "string");
+      }
+      //Function to check whether it is a number, return a boolean
+      function isNumber(item){
+        return (typeof item === "number");
+      }
+     
       /* =====================
 
       End code
