@@ -7,6 +7,8 @@
   <body>
     <!--left panel-->
     <div style="position:fixed;left:0px;width:400px">
+      <div class="header">Health Centers in South Philadelphia</div>
+      <div class="body">Click a pin to view details.</div>
     </div>
     <!--map-->
     <div id="map" style="position:fixed;right:0px;left:400px;height:100%;">
@@ -19,7 +21,7 @@
     <!--Your code starts here-->
     <script>
       var map = L.map('map', {
-        center: [39.9522, -75.1639],
+        center: [39.92965551009491, -75.1685588153433],
         zoom: 14
       });
       var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
@@ -70,10 +72,31 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      var healthCentersData = [Object.keys(healthCenters[0])];
 
+      var jsonToCsv = function(json) { 
+        for (i = 0; i < json.length; i = i + 1){
+          healthCentersData.push(Object.values(json[i]))
+        }
+        return healthCentersData;
+        console.log(healthCentersData);
+      };
 
-      var addMarkers = function(map) {};
+      var addMarkers = function(map) {
+        for (i = 0; i < healthCentersData.length; i = i + 1 ) {
+          if (healthCentersData[i][5]<=19149 && healthCentersData[i][5]>=19140){
+            L.marker(
+              [healthCentersData[i][1],healthCentersData[i][0]]).bindPopup(
+                healthCentersData[i][3] + 
+                '</br>' + 
+                healthCentersData[i][9] +
+                '</br>' + 
+                healthCentersData[i][6]
+                ).addTo(map)
+          } else {console.log('These health centers are out of range.')
+          }
+        }
+      };
 
       /* =====================
 
