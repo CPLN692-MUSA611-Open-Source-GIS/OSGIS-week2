@@ -64,7 +64,7 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    //var data = bikeArrayClean;
 
     /* =====================
 
@@ -72,12 +72,12 @@
 
     ===================== */
 
-    var filteredData = []
+    //var filteredData = []
 
-    for (var i =0; i < data.length; i +=1 ){
-      if(data[i][3]>20)
-      filteredData.push(data[i])
-    }
+    //for (var i =0; i < data.length; i +=1 ){
+    //  if(data[i][3]>20)
+    //  filteredData.push(data[i])
+    //}
 
     /* =====================
 
@@ -85,6 +85,80 @@
 
     ===================== */
 
+    //var map = L.map('map', {
+    //  center: [39.9522, -75.1639],
+    //  zoom: 14
+    //});
+
+    //var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
+    //  attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    //  subdomains: 'abcd',
+    //  minZoom: 0,
+    //  maxZoom: 20,
+    //  ext: 'png'
+    //}).addTo(map);
+
+    /* =====================
+
+    Start code to add markers to map
+
+    ===================== */
+    //for (var i =0; i < filteredData.length; i +=1 ){
+    //  lat = filteredData[i][1]
+    //  lng = filteredData[i][0]
+    //  L.marker([lat,lng]).addTo(map);
+    //}
+    /* =====================
+
+    End code to add markers to map
+
+    ===================== */
+
+    var dirtyData = bikeArrayDirty;
+
+    /* =====================
+    
+    Working with Dirty Data
+
+    ===================== */
+    
+    // Clean the data
+
+    for (var i =0; i < dirtyData.length; i +=1 ){
+      if (dirtyData[i].length === 2){
+        dirtyData[i][0] = parseFloat(dirtyData[i][0])
+        dirtyData[i][1] = parseFloat(dirtyData[i][1])
+        dirtyData[i][2] = '';
+        dirtyData[i][3] = 0
+      }
+      else if(dirtyData[i].length === 3){
+        dirtyData[i][0] = parseFloat(dirtyData[i][0])
+        dirtyData[i][1] = parseFloat(dirtyData[i][1])
+        dirtyData[i][3] = 0
+      }
+      else if(dirtyData[i].length === 4){
+        dirtyData[i][0] = parseFloat(dirtyData[i][0])
+        dirtyData[i][1] = parseFloat(dirtyData[i][1])
+        dirtyData[i][3] = parseFloat(dirtyData[i][3])
+      }
+      else {
+        dirtyData[i].splice(0,1)
+        dirtyData[i][0] = parseFloat(dirtyData[i][0])
+        dirtyData[i][1] = parseFloat(dirtyData[i][1])
+        dirtyData[i][3] = parseFloat(dirtyData[i][3])
+      }
+    }
+
+    //filter data
+
+    var cleanedData = []
+
+    for (var i =0; i < dirtyData.length; i +=1 ){
+      if(dirtyData[i][3]>20)
+      cleanedData.push(dirtyData[i])
+    }
+
+    // map
     var map = L.map('map', {
       center: [39.9522, -75.1639],
       zoom: 14
@@ -98,24 +172,19 @@
       ext: 'png'
     }).addTo(map);
 
-    /* =====================
-
-    Start code to add markers to map
-
-    ===================== */
-    for (var i =0; i < filteredData.length; i +=1 ){
-      lat = filteredData[i][1]
-      lng = filteredData[i][0]
+    // add markers to map
+    for (var i =0; i < cleanedData.length; i +=1 ){
+      lat = cleanedData[i][1]
+      lng = cleanedData[i][0]
       L.marker([lat,lng]).addTo(map);
     }
+
+
     /* =====================
 
-    End code to add markers to map
+    End code to work with dirty data
 
     ===================== */
-
-
-    
     </script>
   </body>
 </html>
