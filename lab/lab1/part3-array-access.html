@@ -85,23 +85,39 @@
     Start code
 
     ===================== */
-
-    let i=0
+    // Task 1: Data Storage
+    // Task 2: Process Data
     restaurantData=[[39.9166402,-75.1834204,'Asian Palace Restaurant'],
                     [39.9480841,-75.1643784,'Barbuzzo'],
                     [39.9483346,-75.1876091,'Friday Saturday Sunday'],
+
+      //Task 3: Add Two Additional Markers
                     [39.9468870,-75.1723313, 'The Dandelion'],
                     [39.9524625,-75.1959650, 'CO-OP Restaurant & Lounge']];
+    let i=0
     while(i< restaurantData.length){
       lat = restaurantData[i][0]
       lng = restaurantData[i][1]
       Content = restaurantData[i][2]
       L.marker([lat,lng]).addTo(map);
+
+      //Task 4: Add Popups to Markers
       let marker = L.marker([lat, lng]).addTo(map)
       marker.bindPopup(Content).openPopup();
       i++;
     }    
     
+    //Task 5: Convert to JS Objects
+    let restaurantsObj = [];
+    let a=0;
+    while(i<restaurantData.length){
+      restaurantsObj.push({
+        lat: restaurantData[a][0],
+        lng: restaurantData[a][1],
+        Content : restaurantData[a][2]
+      })
+    console.log(restaurantsObj)
+  }
 
     /* =====================
 
