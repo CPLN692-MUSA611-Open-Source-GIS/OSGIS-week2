@@ -99,11 +99,9 @@
       lat = restaurantData[i][0]
       lng = restaurantData[i][1]
       Content = restaurantData[i][2]
-      L.marker([lat,lng]).addTo(map);
 
       //Task 4: Add Popups to Markers
-      let marker = L.marker([lat, lng]).addTo(map)
-      marker.bindPopup(Content).openPopup();
+      L.marker([lat, lng]).addTo(map).bindPopup(Content).openPopup();
       i++;
     }    
     

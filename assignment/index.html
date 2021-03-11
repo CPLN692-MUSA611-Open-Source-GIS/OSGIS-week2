@@ -19,8 +19,8 @@
     <!--Your code starts here-->
     <script>
       var map = L.map('map', {
-        center: [39.9522, -75.1639],
-        zoom: 14
+        center: [39.9822, -75.1639],
+        zoom: 12
       });
       var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
         attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -70,10 +70,68 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      //Representing the health_centers dataset in an array of arrays
+
+      var jsonToCsv = function(json) {
+      var csv = []
+      csv[0] = Object.keys(json[0])   // Get the keys and use them as column names.
+
+      for (var i=0; i<json.length; i+=1) {
+        csv.push(Object.values(json[i]))
+      }
+
+      return csv
+      }
+
+      
+      healthCentersCsv= jsonToCsv(healthCenters)
+      
+      //Put a marker on the map for each health center with a popup
+
+      var addMarkers = function(csv) {
+        for(i=1;i<csv.length;i+=1){
+        lat = csv[i][1]
+        lng = csv[i][0]
+        Name = csv[i][2]
+        L.marker([lat,lng]).addTo(map).bindPopup(Name).openPopup()
+        }
+      };
+
+      //console.log(addMarkers(healthCentersCsv))
 
 
-      var addMarkers = function(map) {};
+      // Filter zip codes ranging from 19140 to 19149
+      var addMarkers2 = function(csv) {
+        for(i=1;i<csv.length;i+=1){
+          if(csv[i][5]>=19140 && csv[i][5]<=19149){
+            lat = csv[i][1]
+            lng = csv[i][0]
+            Name = csv[i][3]
+            console.log(lat, typeof(lat))
+            console.log(lng, typeof(lng))
+            console.log(Name, typeof(Name))
+
+            //give dental locations a different icon
+            var dentalIcon = L.icon({
+              iconUrl: 'https://www.shareicon.net/data/2016/07/12/795023_dentist_512x512.png',
+              iconSize: [38, 38],
+              iconAnchor: [22, 94],
+              popupAnchor: [-3, -76],
+            });
+
+            if(csv[i][8]!="N/A"){
+              L.marker([lat,lng],{icon: dentalIcon}).addTo(map).bindPopup(Name).openPopup()
+            }
+            else{
+              L.marker([lat,lng]).addTo(map).bindPopup(Name).openPopup()
+            }
+          }
+        }
+      };
+
+      console.log(addMarkers2(healthCentersCsv))
+
+      
 
       /* =====================
 
