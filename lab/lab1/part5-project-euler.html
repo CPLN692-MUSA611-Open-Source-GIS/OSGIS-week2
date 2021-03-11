@@ -31,7 +31,37 @@
 
     /* =====================
 
+    Problem 1
+    
     Start code
+
+    ===================== */
+
+    var list=[]
+
+    for(var i =0; i < 1000; i +=1){
+      if(i%3 === 0 || i%5 === 0){
+        list.push(i)
+      }
+    }
+
+    var add = function (a, b) {
+        return a + b;
+      }
+
+    list.total = function () { 
+      return this.reduce(add, 0)
+      }
+    
+    console.log(list.total())
+    
+
+
+    /* =====================
+
+    Problem 1
+
+    End code
 
     ===================== */
 
@@ -39,10 +69,54 @@
 
     /* =====================
 
-    End code
+    Problem 2
+    
+    Start code
 
     ===================== */
 
+    var array1=[];
+
+    array1[0] = 1;
+    array1[1] = 2;
+
+
+    for (var i=2; i<100; i+=1){
+
+      array1[i]=array1[i-1] + array1[i-2]
+
+    }
+    
+    var array2=[]
+
+    for(var i=0; i<array1.length; i+=1){
+      if(array1[i]<4000000){
+        array2.push(array1[i])
+      }
+    }
+    
+    var array3=[]
+
+    for(var i=0; i<array2.length; i+=1){
+      if(array2[i]%2===0){
+        array3.push(array2[i])
+      }
+    }
+
+    array3.total = function () { 
+      return this.reduce(add, 0)
+      }
+    
+    console.log(array3.total())
+
+
+    /* =====================
+
+    Problem 2
+
+    End code
+
+    ===================== */
     </script>
   </body>
 </html>
