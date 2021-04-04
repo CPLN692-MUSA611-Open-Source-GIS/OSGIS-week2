@@ -64,7 +64,7 @@
 
     ===================== */
 
-    var data = bikeArrayClean;
+    var data = bikeArrayDirty;
 
     /* =====================
 
@@ -72,8 +72,20 @@
 
     ===================== */
 
+    var dataFiltered = []
+    for (i=0; i < data.length; i = i+1){
+      if(data[i].length == 4){
+      dataFiltered.push(parseFloat(data[i][1]),parseFloat(data[i][0]),data[i][2],parseFloat(data[i][3].split(' ')[0])]);
+    }
+  }
 
-
+  var dataCleaned = []
+  for (n = 0; n < dataFiltered.length; n = n + 1){
+    if(dataFiltered[n][3] > 20){
+      dataCleaned.push([dataFiltered[n][0], dataFiltered[n][1], dataFiltered[n][2], dataFiltered[n][3]])
+    }
+  }
+    
     /* =====================
 
     End code to filter data
@@ -99,7 +111,13 @@
 
     ===================== */
 
+    function create_marker (bike_data) {
+      for (i = 0; i < bike_data.length; i = i + 1) {
+        L.marker([bike_data[i][1].lat, bike_data[i][0]]).addTo(map).bindPopup(bike_data[i].name).openPopup()
+      }
+    }
 
+    create_marker (dataCleaned)
 
     /* =====================
 
