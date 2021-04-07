@@ -86,15 +86,26 @@
 
     ===================== */
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    let restaurantData = [{lat:39.955063609098104, long:-75.20252106691997, name:'U-Town'},
+        {lat:39.97391943558649, long:-75.13375848153837, name:'Suraya Restaurant'}, 
+        {lat:39.97133259948956, long:-75.13374779162109,name:'La Colombe Coffee Roasters'},
+        {lat:39.94852455353625, long:-75.17284518871377, name:'Metropolitan Bakery (Rittenhouse Square)'},
+        {lat: 39.953157367528895, long: -75.19195793712056, name:'Goldie'}]
+
+    function create_marker (restaurant_data) {
+      for (i = 0; i < restaurant_data.length; i = i + 1) {
+        L.marker([restaurant_data[i].lat, restaurant_data[i].long]).addTo(map).bindPopup(restaurant_data[i].name).openPopup()
+      }
+    }
+
+    create_marker (restaurantData)
 
     /* =====================
 
     End code
 
     ===================== */
+    
 
     </script>
   </body>

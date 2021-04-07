@@ -70,10 +70,23 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      // var jsonToCsv = function(json) { console.log(json); };
+      
 
-
-      var addMarkers = function(map) {};
+      var jsonToCsv = function(json) {
+          healthCenters = [Object.keys(json[0])] //extract column headers
+         for (var i = 0; i < json.length; i = i + 1 ) {  //loop through and add to array
+          healthCenters.push(Object.values(json[i]))
+          };
+            console.log(healthCenters)
+          };
+      
+      var addMarkers = function(map) {
+        for(var i = 1; i< healthCenters.length; i = i+1){
+          if (healthCenters[i][5] >= 19140 && healthCenters[i][5] <= 19149)
+          L.marker([healthCenters[i][1], healthCenters[i][0]]).bindPopup(healthCenters[i][3]).openPopup().addTo(map)
+        }
+      };
 
       /* =====================
 
