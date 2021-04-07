@@ -92,9 +92,9 @@
         {lat:39.94852455353625, long:-75.17284518871377, name:'Metropolitan Bakery (Rittenhouse Square)'},
         {lat: 39.953157367528895, long: -75.19195793712056, name:'Goldie'}]
 
-    function create_marker (res_data) {
-      for (i = 0; i < res_data.length; i = i + 1) {
-        L.marker([res_data[i].lat, res_data[i].long]).addTo(map).bindPopup(res_data[i].name).openPopup()
+    function create_marker (restaurant_data) {
+      for (i = 0; i < restaurant_data.length; i = i + 1) {
+        L.marker([restaurant_data[i].lat, restaurant_data[i].long]).addTo(map).bindPopup(restaurant_data[i].name).openPopup()
       }
     }
 

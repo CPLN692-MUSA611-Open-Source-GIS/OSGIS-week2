@@ -113,7 +113,7 @@
 
     function create_marker (bike_data) {
       for (i = 0; i < bike_data.length; i = i + 1) {
-        L.marker([bike_data[i][1].lat, bike_data[i][0]]).addTo(map).bindPopup(bike_data[i][2]).openPopup()
+        L.marker([bike_data[i][1], bike_data[i][0]]).addTo(map).bindPopup(bike_data[i][2]).openPopup()
       }
     }
 
