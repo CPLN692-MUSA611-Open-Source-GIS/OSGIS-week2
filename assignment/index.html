@@ -70,11 +70,47 @@
 
       ===================== */
 
-      var jsonToCsv = function(json) { console.log(json); };
+      var jsonToCsv = function(json) { 
+         
+        var csvArray = [];
+        csvArray.push(Object.keys(json[0]));
+
+        for (var i = 0; i < json.length; i++){
+         csvArray.push(Object.values(json[i]))
+        }
+        console.log(json);
+        return csvArray;
+      };
 
 
-      var addMarkers = function(map) {};
+      var dentalIcon = L.icon({
+        iconUrl: 'images/leaf-red.png',
+        iconSize: [38, 95],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76],
+        shadowUrl: 'images/leaf-shadow.png',
+        shadowSize: [68, 95],
+        shadowAnchor: [22, 94]
+      });
 
+
+      var addMarkers = function(map) {
+
+        csv = jsonToCsv(healthCenters);
+        csv.forEach(function(item, index){
+          if ((index > 0) && isInTheArea(item)){
+            if (item[8] != "N/A"){
+              L.marker([item[1], item[0]], {icon: dentalIcon}).bindPopup(item[3]).addTo(map).openPopup();
+            } else{
+              L.marker([item[1], item[0]]).bindPopup(item[3]).addTo(map).openPopup();
+            }
+          }
+        })
+      };
+
+      function isInTheArea(item){
+        return (item[5] >= 19104) && (item[5] <= 19149);
+      }
       /* =====================
 
       End code

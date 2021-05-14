@@ -86,9 +86,25 @@
 
     ===================== */
 
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
-    L.marker([0, 0]).addTo(map);
+    //Create an array of arrays
+    restaurantData = [[39.95218647730202, -75.17471970661114, "Fuji Mountain Japanese Restaurant"]];
+      
+    //Add 2 restaurants to the array
+    restaurantData.push([39.95614473592909, -75.16901965014638, "Chops Restaurant and Bar"],[39.95206548980207, -75.16232485688896, "El Vez"]);
+    
+    //Create markers with popup
+    restaurantData.forEach(item => {
+      var marker = L.marker([item[0], item[1]]).addTo(map)
+      marker.bindPopup(item[2]);
+    });
+
+    //Convert to JS Object
+    objArray = [];
+    restaurantData.forEach(item => {
+      obj = {lat: item[0], lng: item[1], label: item[2]}
+      objArray.push(obj);
+    });
+    console.log(objArray);
 
     /* =====================
 
